@@ -68,3 +68,17 @@ CREATE TABLE pendingGroupmembers(
 	CONSTRAINT group_fk FOREIGN KEY (userID) REFERENCES groups(gID)
 	CONSTRAINT user_fk FOREIGN KEY (gID) REFERENCES profile(userID) 
 );
+CREATE OR REPLACE TRIGGER Remove_From_Pending_Friends
+  BEFORE INSERT ON friends
+  FOR EACH ROW
+	BEGIN
+		DELETE FROM pendingFriends WHERE fromID = :new.userID1 AND toID = :new.userID2;
+	END;
+/
+CREATE OR REPLACE TRIGGER Remove_From_Pending_Groups
+  BEFORE INSERT ON groupMembership
+  FOR EACH ROW
+	BEGIN
+		DELETE FROM pendingGroupmembers WHERE gID = :new.gID AND userID = :new.userID;
+	END;
+/
