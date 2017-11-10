@@ -4,7 +4,7 @@ CREATE TABLE profile(
 	password varchar2(50),
 	date_of_birth date,
 	lastlogin timestamp,
-	CONSTRAINT p_pk PRIMARY KEY userID
+	CONSTRAINT profile_pk PRIMARY KEY userID
 );
 
 CREATE TABLE friends(
@@ -12,18 +12,18 @@ CREATE TABLE friends(
 	userID2 varchar2(20),
 	JDate date,
 	message varchar2(200),
-	CONSTRAINT f_pk primary key(userID1, userID2),
-	CONSTRAINT F_FK1 FOREIGN KEY(userID1) REFERENCES profile(userID),
-	CONSTRAINT f_fk2 FOREIGN KEY (userID2) REFERENCES profile(userID)
+	CONSTRAINT friends_pk primary key(userID1, userID2),
+	CONSTRAINT users_fk1 FOREIGN KEY(userID1) REFERENCES profile(userID),
+	CONSTRAINT users_fk2 FOREIGN KEY (userID2) REFERENCES profile(userID)
 );
 
 CREATE TABLE pendingFriends(
 	fromID varchar2(20)
 	toID varchar2(20)
 	message varchar2(200)
-	CONSTRAINT pf_pk PRIMARY KEY(fromID, toID),
-	CONSTRAINT pf_fk1 FOREIGN KEY(fromID) REFERENCES profile(userID),
-	CONSTRAINT pf_fk2 FOREIGN KEY(toID) REFERENCES profile(userID)
+	CONSTRAINT pendingfrineds_pk PRIMARY KEY(fromID, toID),
+	CONSTRAINT profile_fk1 FOREIGN KEY(fromID) REFERENCES profile(userID),
+	CONSTRAINT profile_fk2 FOREIGN KEY(toID) REFERENCES profile(userID)
 );
 
 CREATE TABLE messages(
@@ -33,17 +33,17 @@ CREATE TABLE messages(
 	toUserID varchar2(20),
 	toGroupID varchar2(20),
 	dateSent date,
-	CONSTRAINT m_pk PRIMARY KEY(msgID),
-	CONSTRAINT m_fk1 FOREIGN KEY(fromID) REFERENCES profile(userID),
-	CONSTRAINT m_fk2 FOREIGN KEY(toUserID) REFERENCES profile(userID),
-	CONSTRAINT m_fk2 FOREIGN KEY(toGroupID) REFERENCES groups(gID)
+	CONSTRAINT messages_pk PRIMARY KEY(msgID),
+	CONSTRAINT profile_fk1 FOREIGN KEY(fromID) REFERENCES profile(userID),
+	CONSTRAINT profile_fk2 FOREIGN KEY(toUserID) REFERENCES profile(userID),
+	CONSTRAINT groups_fk FOREIGN KEY(toGroupID) REFERENCES groups(gID)
 );
 
 CREATE TABLE messageRecipient(
 	msgID varchar2(20),
 	userID varchar2(20),
-	CONSTRAINT mr_pk PRIMARY KEY(msgID),
-	CONSTRAINT mr_fk FOREIGN KEY(userID) REFERENCES profile(userID)	
+	CONSTRAINT messagerecipient_pk PRIMARY KEY(msgID),
+	CONSTRAINT profile_fk FOREIGN KEY(userID) REFERENCES profile(userID)	
 );
 CREATE TABLE groups(
 	gID varchar2(20),
