@@ -45,3 +45,25 @@ CREATE TABLE messageRecipient(
 	CONSTRAINT mr_pk PRIMARY KEY(msgID),
 	CONSTRAINT mr_fk FOREIGN KEY(userID) REFERENCES profile(userID)	
 );
+CREATE TABLE groups(
+	gID varchar2(20),
+	name varchar2(50),
+	description varchar2(200),
+	CONSTRAINT groups_pk PRIMARY KEY (gID)
+);
+CREATE TABLE groupMembership(
+	gID varchar2(20),
+	userID varchar2(20),
+	role varchar2(20),
+	CONSTRAINT groupMembership_pk PRIMARY KEY (gID,userID),
+	CONSTRAINT groupMembershipToGroup_fk FOREIGN KEY (gID) REFERENCES groups(gID),
+	CONSTRAINT groupMembershipToProfile_fk FOREIGN KEY (userID) REFERENCES profiles(userID)
+);
+CREATE TABLE pendingGroupmembers(
+	gID varchar2(20),
+	userID varchar2(20),
+	message varchar2(20),
+	CONSTRAINT pendingGroupmembers_pk PRIMARY KEY (gID,userID)
+	CONSTRAINT group_fk FOREIGN KEY (userID) REFERENCES groups(gID)
+	CONSTRAINT user_fk FOREIGN KEY (gID) REFERENCES profile(userID) 
+);
