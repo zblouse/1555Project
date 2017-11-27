@@ -1,10 +1,25 @@
+--ASSUMPTIONS
+--message attributes are just strings within those shcemas and do not exist within the messages table
+--e.g. the message attribute in friends and pendingfriends are not in messages
+
+DROP TABLE profile cascade constraints;
+DROP TABLE friends cascade constraints;
+DROP TABLE pendingFriends cascade constraints;
+DROP TABLE messages cascade constraints;
+DROP TABLE messageRecipient cascade constraints;
+DROP TABLE groups cascade constraints;
+DROP TABLE groupMembership cascade constraints;
+DROP TABLE pendingGroupmembers cascade constraints;
+
+
+
 CREATE TABLE profile(
 	userID varchar2(20),
 	name varchar2(50) NOT NULL,
 	password varchar2(50) NOT NULL,
 	date_of_birth date,
 	lastlogin timestamp,
-	CONSTRAINT profile_pk PRIMARY KEY userID
+	CONSTRAINT profile_pk PRIMARY KEY(userID)
 );
 
 CREATE TABLE friends(
@@ -13,8 +28,15 @@ CREATE TABLE friends(
 	JDate date,
 	message varchar2(200),
 	CONSTRAINT friends_pk PRIMARY KEY(userID1, userID2),
-	CONSTRAINT users_fk1 FOREIGN KEY(userID1) REFERENCES profile(userID),
-	CONSTRAINT users_fk2 FOREIGN KEY (userID2) REFERENCES profile(userID)
+	CONSTRAINT friends_fk1 FOREIGN KEY(userID1) REFERENCES profile(userID),
+	CONSTRAINT friends_fk2 FOREIGN KEY(userID2) REFERENCES profile(userID)
+);
+
+CREATE TABLE groups(
+	gID varchar2(20),
+	name varchar2(50),
+	description varchar2(200),
+	CONSTRAINT groups_pk PRIMARY KEY (gID)
 );
 
 CREATE TABLE pendingFriends(
@@ -22,21 +44,21 @@ CREATE TABLE pendingFriends(
 	toID varchar2(20),
 	message varchar2(200),
 	CONSTRAINT pendingfrineds_pk PRIMARY KEY(fromID, toID),
-	CONSTRAINT profile_fk1 FOREIGN KEY(fromID) REFERENCES profile(userID),
-	CONSTRAINT profile_fk2 FOREIGN KEY(toID) REFERENCES profile(userID)
+	CONSTRAINT pendingFriends_fk1 FOREIGN KEY(fromID) REFERENCES profile(userID),
+	CONSTRAINT pendingFriends_fk2 FOREIGN KEY(toID) REFERENCES profile(userID)
 );
 
 --need to declare either to userid or group id to not null
 CREATE TABLE messages(
 	msgID varchar2(20),
 	fromID varchar2(20) NOT NULL,
-	message varchar2(20),
-	toUserID varchar2(20),
-	toGroupID varchar2(20),
+	message varchar2(200),
+	toUserID varchar2(20) DEFAULT NULL,
+	toGroupID varchar2(20) DEFAULT NULL,
 	dateSent date,
 	CONSTRAINT messages_pk PRIMARY KEY(msgID),
-	CONSTRAINT profile_fk1 FOREIGN KEY(fromID) REFERENCES profile(userID),
-	CONSTRAINT profile_fk2 FOREIGN KEY(toUserID) REFERENCES profile(userID),
+	CONSTRAINT messages_fk1 FOREIGN KEY(fromID) REFERENCES profile(userID),
+	CONSTRAINT messages_fk2 FOREIGN KEY(toUserID) REFERENCES profile(userID),
 	CONSTRAINT groups_fk FOREIGN KEY(toGroupID) REFERENCES groups(gID)
 );
 
@@ -46,27 +68,22 @@ CREATE TABLE messageRecipient(
 	CONSTRAINT messagerecipient_pk PRIMARY KEY(msgID),
 	CONSTRAINT profile_fk FOREIGN KEY(userID) REFERENCES profile(userID)	
 );
-CREATE TABLE groups(
-	gID varchar2(20),
-	name varchar2(50),
-	description varchar2(200),
-	CONSTRAINT groups_pk PRIMARY KEY (gID)
-);
+
 CREATE TABLE groupMembership(
 	gID varchar2(20),
 	userID varchar2(20),
 	role varchar2(20) NOt NULL,
 	CONSTRAINT groupMembership_pk PRIMARY KEY (gID,userID),
 	CONSTRAINT groupMembershipToGroup_fk FOREIGN KEY (gID) REFERENCES groups(gID),
-	CONSTRAINT groupMembershipToProfile_fk FOREIGN KEY (userID) REFERENCES profiles(userID)
+	CONSTRAINT groupMembershipToProfile_fk FOREIGN KEY (userID) REFERENCES profile(userID)
 );
 CREATE TABLE pendingGroupmembers(
 	gID varchar2(20),
 	userID varchar2(20),
 	message varchar2(20),
-	CONSTRAINT pendingGroupmembers_pk PRIMARY KEY (gID,userID)
-	CONSTRAINT group_fk FOREIGN KEY (userID) REFERENCES groups(gID)
-	CONSTRAINT user_fk FOREIGN KEY (gID) REFERENCES profile(userID) 
+	CONSTRAINT pendingGroupmembers_pk PRIMARY KEY (gID,userID),
+	CONSTRAINT group_fk FOREIGN KEY(gID) REFERENCES groups(gID),
+	CONSTRAINT user_fk FOREIGN KEY(userID) REFERENCES profile(userID)
 );
 CREATE OR REPLACE TRIGGER Remove_From_Pending_Friends
   BEFORE INSERT ON friends
