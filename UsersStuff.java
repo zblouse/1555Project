@@ -164,6 +164,29 @@ public class UsersStuff {
 
 
     }
+    //logging out
+    public void userLogOut(String loginName){
+        try {
+            Timestamp currentStamp = new Timestamp(System.currentTimeMillis());
+            statement = connection.createStatement(); //create an instance
+
+            //I will show the insert worked by selecting the content of the table again
+            //statement = connection.createStatement();
+            System.out.println("******Attempting LogOut******");
+            query = "UPDATE profile SET lastlogin=? where userID = ?";
+
+            PreparedStatement updateStatement = connection.prepareStatement(query);
+            updateStatement.setTimestamp(1, currentStamp);
+            updateStatement.setString(2, username);
+            updateStatement.executeUpdate();
+
+            System.exit(0);
+        }catch(Exception Ex) {
+            System.out.println("Error logout user querey.  Machine Error: " +
+                    Ex.toString());
+        }
+
+    }
     //Initiating a friendship
     public boolean initiateFriendship(String username, String friendname, String message){
         System.out.println("Attempting to initiate friend request");
@@ -422,7 +445,7 @@ public class UsersStuff {
         //users.displayFriends("uav97");
         //User thisUser= users.retrieveProfile("zab30");
         //System.out.println("Retrieved user: "+thisUser.getName());
-
+        users.userLogOut("zab30");
         users.closeConnection();
 
     }
