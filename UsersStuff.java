@@ -21,6 +21,7 @@
 */
 
 import java.sql.*;  //import the file containing definitions for the parts
+
 //needed by java for database connection and manipulation
 
 public class UsersStuff {
@@ -57,54 +58,25 @@ public class UsersStuff {
         }
 
 
-    /*We will now perform a simple query to the database, asking it for all the
-    records it has.  For your project, performing queries will be similar*/
     }
-    public boolean createUser(){
-        int counter = 1;
+    //creating a user in the db
+    public boolean createUser(String username, String name, String password, String email, String dob, Timestamp stamp){
+
         try {
-            statement = connection.createStatement(); //create an instance
-            query = "SELECT * FROM Test"; //sample query one
-
-            resultSet = statement.executeQuery(query); //run the query on the DB table
-      /*the results in resultSet have an odd quality.  The first row in result
-      set is not relevant data, but rather a place holder.  This enables us to
-      use a while loop to go through all the records.  We must move the pointer
-      forward once using resultSet.next() or you will get errors*/
-
-            while (resultSet.next()) //this not only keeps track of if another record
-            //exists but moves us forward to the first record
-            {
-                System.out.println("Record " + counter + ": " +
-                        resultSet.getString(1) + ", " + //since the first item was of type
-                        //string, we use getString of the
-                        //resultSet class to access it.
-                        //Notice the one, that is the
-                        //position of the answer in the
-                        //resulting table
-                        resultSet.getLong(2) + ", " +   //since second item was number(10),
-                        //we use getLong to access it
-                        resultSet.getDate(3)); //since type date, getDate.
-                counter++;
-            }
-
-
-      /*Now, we show an insert, using preparedStatement. Of course for this you can also write the query directly as the above case with select, and vice versa. */
-
-            String name = "tester 2";
-            long ssn = 111111113;
-
 
             java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd");
 
-            java.sql.Date bday = new java.sql.Date(df.parse("1990-01-20").getTime());
+            java.sql.Date bday = new java.sql.Date(df.parse(dob).getTime());
+            //INSERT into profile VALUES('ZachSmith','Zach Smith','admin',TO_DATE('01-JAN-91'),NULL);
 
-            query = "insert into Test values (?,?,?)";
+            query = "insert into profile values (?,?,?,?,?)";
 
             PreparedStatement updateStatement = connection.prepareStatement(query);
-            updateStatement.setString(1, name);
-            updateStatement.setLong(2, ssn);
-            updateStatement.setDate(3, bday);
+            updateStatement.setString(1, username);
+            updateStatement.setString(2, name);
+            updateStatement.setString(3,password);
+            updateStatement.setDate(4, bday);
+            updateStatement.setTimestamp(5,stamp);
 
             updateStatement.executeUpdate();
 
@@ -118,33 +90,91 @@ public class UsersStuff {
 
       */
 
-            //I will show the insert worked by selecting the content of the table again
-            //statement = connection.createStatement();
-            query = "SELECT * FROM Test";
-            resultSet = statement.executeQuery(query);
-            System.out.println("\nAfter the insert, data is...\n");
-            counter = 1;
-            while (resultSet.next()) {
-                System.out.println("Record " + counter + ": " +
-                        resultSet.getString(1) + ", " +
-                        resultSet.getLong(2) + ", " +
-                        resultSet.getDate(3));
-                counter++;
-            }
 
-            connection.close();
 
         } catch (Exception Ex) {
-            System.out.println("Error running the sample queries.  Machine Error: " +
+            System.out.println("Error running the Create user Querey.  Machine Error: " +
+                    Ex.toString());
+        }
+        try {
+
+            statement = connection.createStatement(); //create an instance
+
+            //I will show the insert worked by selecting the content of the table again
+            //statement = connection.createStatement();
+            query = "SELECT * FROM profile";
+            resultSet = statement.executeQuery(query);
+            if(resultSet==null){
+                System.out.println("Result set is null");
+            }else {
+                System.out.println("\nAfter the insert, data is...\n");
+                int counter = 1;
+                while (resultSet.next()) {
+                    System.out.println("Record " + counter + ": " +
+                            resultSet.getString(1) + ", " +
+                            resultSet.getString(2) + ", " +
+                            resultSet.getString(3) + ", " +
+                            resultSet.getDate(4));
+                    counter++;
+                }
+            }
+
+
+
+        } catch (Exception Ex) {
+            System.out.println("Error reading Create user querey.  Machine Error: " +
                     Ex.toString());
         }
 
-        System.out.println("Good Luck");
+
         return true;
     }
+    public boolean userLogin(String loginName, String loginPassword){
+        try {
+            statement = connection.createStatement(); //create an instance
 
+            //I will show the insert worked by selecting the content of the table again
+            //statement = connection.createStatement();
+            query = "SELECT * FROM profile where userID='" + loginName + "' AND password='" + loginPassword+"'";
+            resultSet = statement.executeQuery(query);
+            int counter = 0;
+            while (resultSet.next()) {
+                counter++;
+                System.out.println("Record " + counter + ": " +
+                        resultSet.getString(1) + ", " +
+                        resultSet.getString(2) + ", " +
+                        resultSet.getString(3) + ", " +
+                        resultSet.getDate(4));
+
+            }
+            if(counter==1){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception Ex) {
+            System.out.println("Error login user querey.  Machine Error: " +
+                    Ex.toString());
+        }
+        return false;
+
+
+    }
+    public void closeConnection(){
+        try {
+            connection.close();
+        }catch(Exception Ex) {
+            System.out.println("Error Closing connection.  Machine Error: " +
+                    Ex.toString());
+        }
+    }
     public static void main(String args[]) {
         UsersStuff demo = new UsersStuff();
-        demo.createUser();
+        Timestamp blankStamp = new Timestamp(87);
+        //demo.createUser("zab301","Zach Blouse","adminPass","zab30@pitt.edu","1996-05-19",blankStamp);
+        demo.userLogin("zab30","adminPass");
+        System.out.println("Did it work?");
+        demo.closeConnection();
+
     }
 }
