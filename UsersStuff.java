@@ -163,20 +163,19 @@ public class UsersStuff {
 
     }
     //Initiating a friendship
-    public boolean initiateFriendship(String username, String fiendname, String message){
-
+    public boolean initiateFriendship(String username, String friendname, String message){
+        System.out.println("Attempting to initiate friend request");
         try {
 
          //
 
-            query = "insert into profile values (?,?,?,?,?)";
+            query = "insert into pendingFriends values (?,?,?)";
 
             PreparedStatement updateStatement = connection.prepareStatement(query);
             updateStatement.setString(1, username);
-            updateStatement.setString(2, name);
-            updateStatement.setString(3,password);
-            updateStatement.setDate(4, bday);
-            updateStatement.setTimestamp(5,stamp);
+            updateStatement.setString(2, friendname);
+            updateStatement.setString(3,message);
+
 
             updateStatement.executeUpdate();
 
@@ -193,7 +192,7 @@ public class UsersStuff {
 
 
         } catch (Exception Ex) {
-            System.out.println("Error running the Create user Querey.  Machine Error: " +
+            System.out.println("Error running the Initiate Friendship Querey.  Machine Error: " +
                     Ex.toString());
         }
         try {
@@ -202,7 +201,7 @@ public class UsersStuff {
 
             //I will show the insert worked by selecting the content of the table again
             //statement = connection.createStatement();
-            query = "SELECT * FROM profile";
+            query = "SELECT * FROM pendingFriends";
             resultSet = statement.executeQuery(query);
             if(resultSet==null){
                 System.out.println("Result set is null");
@@ -213,8 +212,8 @@ public class UsersStuff {
                     System.out.println("Record " + counter + ": " +
                             resultSet.getString(1) + ", " +
                             resultSet.getString(2) + ", " +
-                            resultSet.getString(3) + ", " +
-                            resultSet.getDate(4));
+                            resultSet.getString(3));
+
                     counter++;
                 }
             }
@@ -222,12 +221,44 @@ public class UsersStuff {
 
 
         } catch (Exception Ex) {
-            System.out.println("Error reading Create user querey.  Machine Error: " +
+            System.out.println("Error reading pending friend querey.  Machine Error: " +
                     Ex.toString());
         }
 
 
         return true;
+    }
+    public boolean userLogin(String loginName, String loginPassword){
+        try {
+            statement = connection.createStatement(); //create an instance
+
+            //I will show the insert worked by selecting the content of the table again
+            //statement = connection.createStatement();
+            System.out.println("******Attempting Login******");
+            query = "SELECT * FROM profile where userID='" + loginName + "' AND password='" + loginPassword+"'";
+            resultSet = statement.executeQuery(query);
+            int counter = 0;
+            while (resultSet.next()) {
+                counter++;
+                System.out.println("Record " + counter + ": " +
+                        resultSet.getString(1) + ", " +
+                        resultSet.getString(2) + ", " +
+                        resultSet.getString(3) + ", " +
+                        resultSet.getDate(4));
+
+            }
+            if(counter==1){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception Ex) {
+            System.out.println("Error login user querey.  Machine Error: " +
+                    Ex.toString());
+        }
+        return false;
+
+
     }
     public void closeConnection(){
         try {
@@ -238,25 +269,28 @@ public class UsersStuff {
         }
     }
     public static void main(String args[]) {
-        UsersStuff demo = new UsersStuff();
+        UsersStuff users = new UsersStuff();
         Timestamp blankStamp = new Timestamp(87);
-        //demo.createUser("zab30","Zach Blouse","adminPass","zab30@pitt.edu","1996-05-19",blankStamp);
-        //demo.createUser("zblouse","Zach Blouse","adminPass","zab30@pitt.edu","1996-05-19",blankStamp);
-        //demo.createUser("uav97","Unidentified","adminPass","uav97@pitt.edu","1002-01-12",blankStamp);
-        Boolean validLogin=demo.userLogin("zab30","adminPass");
+        //users.createUser("zab30","Zach Blouse","adminPass","zab30@pitt.edu","1996-05-19",blankStamp);
+        //users.createUser("zblouse","Zach Blouse","adminPass","zab30@pitt.edu","1996-05-19",blankStamp);
+        //users.createUser("uav97","Unidentified","adminPass","uav97@pitt.edu","1002-01-12",blankStamp);
+        /*
+        Boolean validLogin=users.userLogin("zab30","adminPass");
         if(validLogin){
             System.out.println("Logged in successfully");
         }else{
             System.out.println("Invalid username or password");
         }
-        Boolean invalidLogin=demo.userLogin("zab30","wrongPass");
+        Boolean invalidLogin=users.userLogin("zab30","wrongPass");
         if(invalidLogin){
             System.out.println("Logged in successfully");
         }else{
             System.out.println("Invalid username or password");
         }
-        System.out.println("Did it work?");
-        demo.closeConnection();
+        */
+        //users.initiateFriendship("zab30","zblouse","Hello friend. Please accept my request");
+
+        users.closeConnection();
 
     }
 }

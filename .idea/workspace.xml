@@ -11,31 +11,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="JavaDemo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/JavaDemo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-146">
-              <caret line="62" column="74" lean-forward="true" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="74" />
-              <folding>
-                <element signature="e#0#6069#0" expanded="true" />
-                <element signature="e#6020#6021#0" expanded="true" />
-                <marker date="1512155938927" expanded="true" signature="1569:1776" ph="//..." />
-                <marker date="1512155938927" expanded="true" signature="1870:1977" ph="//..." />
-                <marker date="1512155938927" expanded="true" signature="3443:3743" ph="//..." />
-                <marker date="1512155938927" expanded="true" signature="3800:3889" ph="//..." />
-                <marker date="1512155938927" expanded="true" signature="6061:6067" ph=" }" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="UsersStuff.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UsersStuff.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1112">
-              <caret line="169" column="11" lean-forward="false" selection-start-line="169" selection-start-column="11" selection-end-line="169" selection-end-column="11" />
+            <state relative-caret-position="520">
+              <caret line="261" column="5" lean-forward="false" selection-start-line="261" selection-start-column="5" selection-end-line="261" selection-end-column="5" />
               <folding>
-                <element signature="e#0#9760#0" expanded="true" />
+                <element signature="e#0#11013#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -56,16 +38,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-267">
               <caret line="16" column="10" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testDB.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testDB.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -324,18 +296,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Data.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/JavaDemo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-146">
+        <state relative-caret-position="39">
           <caret line="62" column="74" lean-forward="true" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="74" />
           <folding>
             <element signature="e#0#6069#0" expanded="true" />
             <element signature="e#6020#6021#0" expanded="true" />
-            <marker date="1512155938927" expanded="true" signature="1569:1776" ph="//..." />
-            <marker date="1512155938927" expanded="true" signature="1870:1977" ph="//..." />
-            <marker date="1512155938927" expanded="true" signature="3443:3743" ph="//..." />
-            <marker date="1512155938927" expanded="true" signature="3800:3889" ph="//..." />
-            <marker date="1512155938927" expanded="true" signature="6061:6067" ph=" }" />
+            <element signature="e#6066#6067#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -348,20 +324,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Data.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UsersStuff.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1112">
-          <caret line="169" column="11" lean-forward="false" selection-start-line="169" selection-start-column="11" selection-end-line="169" selection-end-column="11" />
+        <state relative-caret-position="520">
+          <caret line="261" column="5" lean-forward="false" selection-start-line="261" selection-start-column="5" selection-end-line="261" selection-end-column="5" />
           <folding>
-            <element signature="e#0#9760#0" expanded="true" />
+            <element signature="e#0#11013#0" expanded="true" />
           </folding>
         </state>
       </provider>
