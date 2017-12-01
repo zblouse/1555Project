@@ -2,7 +2,7 @@
 import java.sql.*;
 public class GroupStuff
 {
-	private Connection connection; //used to hold the jdbc connection to the DB
+	private static Connection connection; //used to hold the jdbc connection to the DB
     private Statement statement; //used to create an instance of the connection
     private ResultSet resultSet; //used to hold the result of your query (if one
     // exists)
@@ -33,65 +33,44 @@ public class GroupStuff
             Ex.printStackTrace();
         }
 	}
-	public boolean createGroup(){
+	public boolean createGroup(String uID, String name, String desc, int lim){
 	int counter = 1;
         try {
             statement = connection.createStatement(); //create an instance
             query = "SELECT * FROM Groups"; //sample query one
 
-            resultSet = statement.executeQuery(query); //run the query on the DB table
-      /*the results in resultSet have an odd quality.  The first row in result
-      set is not relevant data, but rather a place holder.  This enables us to
-      use a while loop to go through all the records.  We must move the pointer
-      forward once using resultSet.next() or you will get errors*/
+            resultSet = statement.executeQuery(query);
 
-            while (resultSet.next()) //this not only keeps track of if another record
-            //exists but moves us forward to the first record
+            while (resultSet.next()) 
             {
                 System.out.println("Record " + counter + ": " +
-                        resultSet.getString(1) + ", " + //since the first item was of type
-                        //string, we use getString of the
-                        //resultSet class to access it.
-                        //Notice the one, that is the
-                        //position of the answer in the
-                        //resulting table
-                        resultSet.getString(2) + ", " +   //since second item was number(10),
-                        //we use getLong to access it
-                        resultSet.getString(3)); //since type date, getDate.
+                        resultSet.getString(1) + ", " +
+                        resultSet.getString(2) + ", " +   
+                        resultSet.getString(3));
                 counter++;
             }
 
-
-      /*Now, we show an insert, using preparedStatement. Of course for this you can also write the query directly as the above case with select, and vice versa. */
-
-            String groupName="TestNameI";
-			String groupID="TestIDI";
-			String description="TestDesc";
-
-
-           // java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd");
-
-            //java.sql.Date bday = new java.sql.Date(df.parse("1990-01-20").getTime());
-
-            query = "insert into Groups values (?,?,?)";
+            String groupName=name;
+			String groupID=name;
+			String description=desc;
+			int limit = lim;
+			
+            query = "insert into Groups values (?,?,?,?)";
 
             PreparedStatement updateStatement = connection.prepareStatement(query);
             updateStatement.setString(1, groupName);
             updateStatement.setString(2, groupID);
             updateStatement.setString(3, description);
-
+			updateStatement.setInt(4, limit);
             updateStatement.executeUpdate();
-
-
-      /* We can also so the insert statement directly as follows:
-
-       query = "INSERT INTO Test VALUES ('Tester', 111111112, '1/Nov/03')";
-      int result = statement.executeUpdate(query); //executing update returns
-      //either the row count for INSERT, UPDATE or DELETE or 0 for SQL
-      //statements that return nothing
-
-      */
-
+			
+			query = "INSERT INTO GroupMembership VALUES (?,?,?)";
+			PreparedStatement membershipStatement = connection.prepareStatement(query);
+			membershipStatement.setString(1,groupID);
+			membershipStatement.setString(2,uID);
+			membershipStatement.setString(3,"Manager");
+			membershipStatement.executeUpdate();
+			
             //I will show the insert worked by selecting the content of the table again
             //statement = connection.createStatement();
             query = "SELECT * FROM Groups";
@@ -102,11 +81,22 @@ public class GroupStuff
                 System.out.println("Record " + counter + ": " +
                         resultSet.getString(1) + ", " +
                         resultSet.getString(2) + ", " +
+                        resultSet.getString(3)+ ", "+
+						resultSet.getInt(4));
+                counter++;
+            }
+			query = "SELECT * FROM GroupMembership";
+            resultSet = statement.executeQuery(query);
+            System.out.println("\nAfter the insert, data is...\n");
+            counter = 1;
+            while (resultSet.next()) {
+                System.out.println("Record " + counter + ": " +
+                        resultSet.getString(1) + ", " +
+                        resultSet.getString(2) + ", " +
                         resultSet.getString(3));
                 counter++;
             }
-
-            connection.close();
+           // connection.close();
 
         } catch (Exception Ex) {
             System.out.println("Error running the sample queries.  Machine Error: " +
@@ -118,19 +108,55 @@ public class GroupStuff
     }
 	
 	
-	public boolean initiateAddingGroup(String uID, String gID)
+	public boolean initiateAddingGroup(String uID, String gID, String msg)
 	{
 		try {
 			int limit;
+			int curNum;
+			int counter;
             statement = connection.createStatement(); //create an instance
-            query = "SELECT grouplimit FROM Groups WHERE groupId = '"+gID+"'"; //sample query one
+			query = "SELECT userID FROM groupMembership WHERE gID ='"+gID+"' AND userID = '"+uID+"'";
+			resultSet = statement.executeQuery(query);
+			if(!resultSet.next())
+			{
+				System.out.println("Error already in group");
+				return false;
+			}
+            query = "SELECT memberLimit FROM Groups WHERE gId = '"+gID+"'"; //sample query one
             ResultSet gLimit = statement.executeQuery(query); //run the query on the DB table
-			limit = gLimmit.getInt("grouplimit");
+			gLimit.next();
+			limit = gLimit.getInt(1);
             query = "SELECT COUNT(*) AS numMems FROM groupMembership WHERE gID = '"+gID+"'";
             resultSet = statement.executeQuery(query);
-       
-
-            connection.close();
+			
+			resultSet.next();
+			curNum = resultSet.getInt(1);
+			if(curNum == limit)
+			{
+				System.out.println("Group at capacity, cannot join.");
+				return false;
+			}
+			
+			query = "INSERT into pendingGroupMembers VALUES(?,?,?)";
+			PreparedStatement pending = connection.prepareStatement(query);
+			pending.setString(1, gID);
+			pending.setString(2,uID);
+			pending.setString(3,msg);
+			pending.executeUpdate();
+			
+			query = "SELECT * FROM pendingGroupMembers";
+            resultSet = statement.executeQuery(query);
+            System.out.println("\nAfter the insert, data is...\n");
+            counter = 1;
+            while (resultSet.next()) {
+                System.out.println("Record " + counter + ": " +
+                        resultSet.getString(1) + ", " +
+                        resultSet.getString(2) + ", " +
+                        resultSet.getString(3));
+                counter++;
+            }
+			
+           
 
         } catch (Exception Ex) {
             System.out.println("Error running the sample queries.  Machine Error: " +
@@ -140,9 +166,88 @@ public class GroupStuff
         System.out.println("Good Luck");
         return true;
     }
+	
+	public boolean confirmMembership(String gID, String uID)
+	{
+		try{
+		statement=connection.createStatement();
+		query = "SELECT * FROM pendingGroupMembers where gID='" + gID + "' AND userID='" + uID+"'";
+            resultSet = statement.executeQuery(query);
+            int counter = 0;
+            while (resultSet.next()) {
+                counter++;
+                System.out.println("Record " + counter + ": " +
+                        resultSet.getString(1) + ", " +
+                        resultSet.getString(2) + ", " +
+                        resultSet.getString(3));
+            }
+			if(counter==0){
+				System.out.println("Error No pendingGroup member.");
+				return false;
+			}
+                connection.setAutoCommit(false);
+				query = "INSERT INTO groupMembership VALUES (?,?,?)";
+				PreparedStatement accepted = connection.prepareStatement(query);
+				accepted.setString(1, gID);
+				accepted.setString(2,uID);
+				accepted.setString(3,"Member");
+				accepted.executeUpdate();
+				
+				query = "DELETE FROM pendingGroupMembers where gID= ? AND userID = ?";
+
+                PreparedStatement deleteStatement = connection.prepareStatement(query);
+                deleteStatement.setString(1, gID);
+                deleteStatement.setString(2,uID);
+                deleteStatement.executeUpdate();
+                connection.commit();
+				
+				connection.setAutoCommit(true);
+				
+			query = "SELECT * FROM pendingGroupMembers";
+            resultSet = statement.executeQuery(query);
+            System.out.println("\nAfter the insert, data is...\n");
+            counter = 1;
+            while (resultSet.next()) {
+                System.out.println("Record " + counter + ": " +
+                        resultSet.getString(1) + ", " +
+                        resultSet.getString(2) + ", " +
+                        resultSet.getString(3));
+                counter++;
+            }
+			
+			query = "SELECT * FROM GroupMembership";
+            resultSet = statement.executeQuery(query);
+            System.out.println("\nAfter the insert, data is...\n");
+            counter = 1;
+            while (resultSet.next()) {
+                System.out.println("Record " + counter + ": " +
+                        resultSet.getString(1) + ", " +
+                        resultSet.getString(2) + ", " +
+                        resultSet.getString(3));
+                counter++;
+            }
+			
+		} catch (Exception Ex) {
+            System.out.println("Error running the sample queries.  Machine Error: " +
+                    Ex.toString());
+        }
+		return true;
 	}
+	
+	public void closeConnection(){
+        try {
+            connection.close();
+        }catch(Exception Ex) {
+            System.out.println("Error Closing connection.  Machine Error: " +
+                    Ex.toString());
+        }
+    }
+	
 	public static void main(String args[]) {
         GroupStuff demo = new GroupStuff();
-        demo.createGroup();
+        demo.createGroup("zab30","trying ssdfsdhard","testDesc", 5);
+		demo.initiateAddingGroup("uav97","trying ssdfsdhard", "hi");
+		demo.confirmMembership("uav97","trying ssdfsdhard");
+		demo.closeConnection();
     }
 }
