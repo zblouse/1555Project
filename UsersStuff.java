@@ -358,6 +358,34 @@ public class UsersStuff {
 
 
     }
+    public User retrieveProfile(String requestedName){
+        try {
+            statement = connection.createStatement(); //create an instance
+
+            //I will show the insert worked by selecting the content of the table again
+            //statement = connection.createStatement();
+            System.out.println("******Attempting Login******");
+            query = "SELECT * FROM profile where userID='" + requestedName +"'";
+            resultSet = statement.executeQuery(query);
+            int counter = 0;
+            while (resultSet.next()) {
+                counter++;
+                User theUser = new User( resultSet.getString(1), resultSet.getString(2),resultSet.getString(3),resultSet.getDate(4),resultSet.getTimestamp(4));
+                return theUser;
+
+            }
+            if(counter==1){
+
+
+            }else{
+                return null;
+            }
+        }catch(Exception Ex) {
+            System.out.println("Error retrieve profile querey.  Machine Error: " +
+                    Ex.toString());
+        }
+        return null;
+    }
     public void closeConnection(){
         try {
             connection.close();
@@ -390,8 +418,11 @@ public class UsersStuff {
         */
         //users.initiateFriendship("zab30","uav97","Hello friend. Please accept my request");
         //users.confirmFriendship("uav97","zab30");
-        users.displayFriends("zab30");
-        users.displayFriends("uav97");
+        //users.displayFriends("zab30");
+        //users.displayFriends("uav97");
+        //User thisUser= users.retrieveProfile("zab30");
+        //System.out.println("Retrieved user: "+thisUser.getName());
+
         users.closeConnection();
 
     }
