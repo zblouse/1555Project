@@ -17,9 +17,13 @@
             <state relative-caret-position="-146">
               <caret line="62" column="74" lean-forward="true" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="74" />
               <folding>
-                <element signature="e#0#6070#0" expanded="true" />
-                <element signature="e#6021#6022#0" expanded="true" />
-                <element signature="e#6067#6068#0" expanded="true" />
+                <element signature="e#0#6069#0" expanded="true" />
+                <element signature="e#6020#6021#0" expanded="true" />
+                <marker date="1512155938927" expanded="true" signature="1569:1776" ph="//..." />
+                <marker date="1512155938927" expanded="true" signature="1870:1977" ph="//..." />
+                <marker date="1512155938927" expanded="true" signature="3443:3743" ph="//..." />
+                <marker date="1512155938927" expanded="true" signature="3800:3889" ph="//..." />
+                <marker date="1512155938927" expanded="true" signature="6061:6067" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -28,10 +32,10 @@
       <file leaf-file-name="UsersStuff.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UsersStuff.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="158" column="21" lean-forward="false" selection-start-line="158" selection-start-column="21" selection-end-line="158" selection-end-column="21" />
+            <state relative-caret-position="-1112">
+              <caret line="169" column="11" lean-forward="false" selection-start-line="169" selection-start-column="11" selection-end-line="169" selection-end-column="11" />
               <folding>
-                <element signature="e#0#6777#0" expanded="true" />
+                <element signature="e#0#9760#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -50,7 +54,7 @@
       <file leaf-file-name="dbCreate.sql" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dbCreate.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
+            <state relative-caret-position="-267">
               <caret line="16" column="10" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="10" />
               <folding />
             </state>
@@ -325,10 +329,22 @@
         <state relative-caret-position="-146">
           <caret line="62" column="74" lean-forward="true" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="74" />
           <folding>
-            <element signature="e#0#6070#0" expanded="true" />
-            <element signature="e#6021#6022#0" expanded="true" />
-            <element signature="e#6067#6068#0" expanded="true" />
+            <element signature="e#0#6069#0" expanded="true" />
+            <element signature="e#6020#6021#0" expanded="true" />
+            <marker date="1512155938927" expanded="true" signature="1569:1776" ph="//..." />
+            <marker date="1512155938927" expanded="true" signature="1870:1977" ph="//..." />
+            <marker date="1512155938927" expanded="true" signature="3443:3743" ph="//..." />
+            <marker date="1512155938927" expanded="true" signature="3800:3889" ph="//..." />
+            <marker date="1512155938927" expanded="true" signature="6061:6067" ph=" }" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dbCreate.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-267">
+          <caret line="16" column="10" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -340,20 +356,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dbCreate.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="16" column="10" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UsersStuff.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="158" column="21" lean-forward="false" selection-start-line="158" selection-start-column="21" selection-end-line="158" selection-end-column="21" />
+        <state relative-caret-position="-1112">
+          <caret line="169" column="11" lean-forward="false" selection-start-line="169" selection-start-column="11" selection-end-line="169" selection-end-column="11" />
           <folding>
-            <element signature="e#0#6777#0" expanded="true" />
+            <element signature="e#0#9760#0" expanded="true" />
           </folding>
         </state>
       </provider>

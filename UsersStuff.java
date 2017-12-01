@@ -129,12 +129,14 @@ public class UsersStuff {
 
         return true;
     }
+    //logging in a user
     public boolean userLogin(String loginName, String loginPassword){
         try {
             statement = connection.createStatement(); //create an instance
 
             //I will show the insert worked by selecting the content of the table again
             //statement = connection.createStatement();
+            System.out.println("******Attempting Login******");
             query = "SELECT * FROM profile where userID='" + loginName + "' AND password='" + loginPassword+"'";
             resultSet = statement.executeQuery(query);
             int counter = 0;
@@ -160,6 +162,73 @@ public class UsersStuff {
 
 
     }
+    //Initiating a friendship
+    public boolean initiateFriendship(String username, String fiendname, String message){
+
+        try {
+
+         //
+
+            query = "insert into profile values (?,?,?,?,?)";
+
+            PreparedStatement updateStatement = connection.prepareStatement(query);
+            updateStatement.setString(1, username);
+            updateStatement.setString(2, name);
+            updateStatement.setString(3,password);
+            updateStatement.setDate(4, bday);
+            updateStatement.setTimestamp(5,stamp);
+
+            updateStatement.executeUpdate();
+
+
+      /* We can also so the insert statement directly as follows:
+
+       query = "INSERT INTO Test VALUES ('Tester', 111111112, '1/Nov/03')";
+      int result = statement.executeUpdate(query); //executing update returns
+      //either the row count for INSERT, UPDATE or DELETE or 0 for SQL
+      //statements that return nothing
+
+      */
+
+
+
+        } catch (Exception Ex) {
+            System.out.println("Error running the Create user Querey.  Machine Error: " +
+                    Ex.toString());
+        }
+        try {
+
+            statement = connection.createStatement(); //create an instance
+
+            //I will show the insert worked by selecting the content of the table again
+            //statement = connection.createStatement();
+            query = "SELECT * FROM profile";
+            resultSet = statement.executeQuery(query);
+            if(resultSet==null){
+                System.out.println("Result set is null");
+            }else {
+                System.out.println("\nAfter the insert, data is...\n");
+                int counter = 1;
+                while (resultSet.next()) {
+                    System.out.println("Record " + counter + ": " +
+                            resultSet.getString(1) + ", " +
+                            resultSet.getString(2) + ", " +
+                            resultSet.getString(3) + ", " +
+                            resultSet.getDate(4));
+                    counter++;
+                }
+            }
+
+
+
+        } catch (Exception Ex) {
+            System.out.println("Error reading Create user querey.  Machine Error: " +
+                    Ex.toString());
+        }
+
+
+        return true;
+    }
     public void closeConnection(){
         try {
             connection.close();
@@ -171,8 +240,21 @@ public class UsersStuff {
     public static void main(String args[]) {
         UsersStuff demo = new UsersStuff();
         Timestamp blankStamp = new Timestamp(87);
-        //demo.createUser("zab301","Zach Blouse","adminPass","zab30@pitt.edu","1996-05-19",blankStamp);
-        demo.userLogin("zab30","adminPass");
+        //demo.createUser("zab30","Zach Blouse","adminPass","zab30@pitt.edu","1996-05-19",blankStamp);
+        //demo.createUser("zblouse","Zach Blouse","adminPass","zab30@pitt.edu","1996-05-19",blankStamp);
+        //demo.createUser("uav97","Unidentified","adminPass","uav97@pitt.edu","1002-01-12",blankStamp);
+        Boolean validLogin=demo.userLogin("zab30","adminPass");
+        if(validLogin){
+            System.out.println("Logged in successfully");
+        }else{
+            System.out.println("Invalid username or password");
+        }
+        Boolean invalidLogin=demo.userLogin("zab30","wrongPass");
+        if(invalidLogin){
+            System.out.println("Logged in successfully");
+        }else{
+            System.out.println("Invalid username or password");
+        }
         System.out.println("Did it work?");
         demo.closeConnection();
 
