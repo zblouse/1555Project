@@ -117,7 +117,7 @@ public class GroupStuff
             statement = connection.createStatement(); //create an instance
 			query = "SELECT userID FROM groupMembership WHERE gID ='"+gID+"' AND userID = '"+uID+"'";
 			resultSet = statement.executeQuery(query);
-			if(!resultSet.next())
+			if(resultSet.next())
 			{
 				System.out.println("Error already in group");
 				return false;
@@ -167,21 +167,15 @@ public class GroupStuff
         return true;
     }
 	
-	public boolean confirmMembership(String gID, String uID)
+	public boolean confirmMembership(String uID, String gID)
 	{
 		try{
 		statement=connection.createStatement();
+		int counter=0;
 		query = "SELECT * FROM pendingGroupMembers where gID='" + gID + "' AND userID='" + uID+"'";
             resultSet = statement.executeQuery(query);
-            int counter = 0;
-            while (resultSet.next()) {
-                counter++;
-                System.out.println("Record " + counter + ": " +
-                        resultSet.getString(1) + ", " +
-                        resultSet.getString(2) + ", " +
-                        resultSet.getString(3));
-            }
-			if(counter==0){
+			System.out.println("----Trying to Confirm Membership -----");
+            if(!resultSet.next()){
 				System.out.println("Error No pendingGroup member.");
 				return false;
 			}
@@ -245,8 +239,8 @@ public class GroupStuff
 	
 	public static void main(String args[]) {
         GroupStuff demo = new GroupStuff();
-        demo.createGroup("zab30","trying ssdfsdhard","testDesc", 5);
-		demo.initiateAddingGroup("uav97","trying ssdfsdhard", "hi");
+        //demo.createGroup("zab30","trying ssdfsdhard","testDesc", 5);
+		//demo.initiateAddingGroup("uav97","trying ssdfsdhard", "hi");
 		demo.confirmMembership("uav97","trying ssdfsdhard");
 		demo.closeConnection();
     }
