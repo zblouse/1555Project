@@ -21,7 +21,8 @@
 */
 
 import java.sql.*;  //import the file containing definitions for the parts
-
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
 //needed by java for database connection and manipulation
 
 public class UsersStuff {
@@ -228,14 +229,16 @@ public class UsersStuff {
 
         return true;
     }
-    public boolean userLogin(String loginName, String loginPassword){
+    //confirm friendship: username is the logged in user, aka the to id in pendingFriends
+    public boolean confirmFriendship(String username, String confirmedFriendUsername){
+        String sentMessage="";
         try {
             statement = connection.createStatement(); //create an instance
 
             //I will show the insert worked by selecting the content of the table again
             //statement = connection.createStatement();
-            System.out.println("******Attempting Login******");
-            query = "SELECT * FROM profile where userID='" + loginName + "' AND password='" + loginPassword+"'";
+            System.out.println("******Attempting Confirm Friendship******");
+            query = "SELECT * FROM pendingFriends where fromID='" + confirmedFriendUsername + "' AND toID='" + username+"'";
             resultSet = statement.executeQuery(query);
             int counter = 0;
             while (resultSet.next()) {
@@ -243,17 +246,45 @@ public class UsersStuff {
                 System.out.println("Record " + counter + ": " +
                         resultSet.getString(1) + ", " +
                         resultSet.getString(2) + ", " +
-                        resultSet.getString(3) + ", " +
-                        resultSet.getDate(4));
-
+                        resultSet.getString(3));
+                sentMessage=resultSet.getString(3);
             }
+            //if counter is 1, there was a pendingFriend request to accept
             if(counter==1){
+                connection.setAutoCommit(false);
+                String date = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+                java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+                java.sql.Date today = new java.sql.Date(df.parse(date).getTime());
+                //INSERT into profile VALUES('ZachSmith','Zach Smith','admin',TO_DATE('01-JAN-91'),NULL);
+
+                query = "insert into friends values (?,?,?,?)";
+
+                PreparedStatement updateStatement = connection.prepareStatement(query);
+                updateStatement.setString(1, username);
+                updateStatement.setString(2,confirmedFriendUsername);
+                updateStatement.setDate(3, today);
+                updateStatement.setString(4,sentMessage);
+                updateStatement.executeUpdate();
+
+                query = "delete from pendingFriends where toID= ? AND fromID = ?";
+
+                PreparedStatement deleteStatement = connection.prepareStatement(query);
+                deleteStatement.setString(1, username);
+                deleteStatement.setString(2,confirmedFriendUsername);
+                deleteStatement.executeUpdate();
+                connection.commit();
+                System.out.println("Created friends: "+username+" & "+confirmedFriendUsername);
+                System.out.println("Deleted request: "+username+" & "+confirmedFriendUsername);
+
+                connection.setAutoCommit(true);
                 return true;
             }else{
+                System.out.println("Error: Attempting to confirm friend request that doens't exist");
                 return false;
             }
         }catch(Exception Ex) {
-            System.out.println("Error login user querey.  Machine Error: " +
+            System.out.println("Error confirm friend.  Machine Error: " +
                     Ex.toString());
         }
         return false;
@@ -271,9 +302,11 @@ public class UsersStuff {
     public static void main(String args[]) {
         UsersStuff users = new UsersStuff();
         Timestamp blankStamp = new Timestamp(87);
-        //users.createUser("zab30","Zach Blouse","adminPass","zab30@pitt.edu","1996-05-19",blankStamp);
-        //users.createUser("zblouse","Zach Blouse","adminPass","zab30@pitt.edu","1996-05-19",blankStamp);
-        //users.createUser("uav97","Unidentified","adminPass","uav97@pitt.edu","1002-01-12",blankStamp);
+        /*
+        users.createUser("zab30","Zach Blouse","adminPass","zab30@pitt.edu","1996-05-19",blankStamp);
+        users.createUser("zblouse","Zach Blouse","adminPass","zab30@pitt.edu","1996-05-19",blankStamp);
+        users.createUser("uav97","Unidentified","adminPass","uav97@pitt.edu","1002-01-12",blankStamp);
+        */
         /*
         Boolean validLogin=users.userLogin("zab30","adminPass");
         if(validLogin){
@@ -288,8 +321,8 @@ public class UsersStuff {
             System.out.println("Invalid username or password");
         }
         */
-        //users.initiateFriendship("zab30","zblouse","Hello friend. Please accept my request");
-
+        users.initiateFriendship("zab30","zblouse","Hello friend. Please accept my request");
+        users.confirmFriendship("zblouse","zab30");
         users.closeConnection();
 
     }
