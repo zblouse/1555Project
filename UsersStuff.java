@@ -23,6 +23,7 @@
 import java.sql.*;  //import the file containing definitions for the parts
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 //needed by java for database connection and manipulation
 
 public class UsersStuff {
@@ -291,6 +292,72 @@ public class UsersStuff {
 
 
     }
+    //displaying friends
+    public boolean displayFriends(String loginName){
+        ArrayList<String> usersFriends = new ArrayList<String>();
+        ArrayList<String> friendsFriends = new ArrayList<String>();
+        try {
+            statement = connection.createStatement(); //create an instance
+
+            //I will show the insert worked by selecting the content of the table again
+            //statement = connection.createStatement();
+            System.out.println("******Attempting Display Friends******");
+            query = "SELECT * FROM friends where userID1='" + loginName + "'";
+            resultSet = statement.executeQuery(query);
+            int counter = 0;
+            while (resultSet.next()) {
+                counter++;
+
+                usersFriends.add(resultSet.getString(2));
+
+
+            }
+            query = "SELECT * FROM friends where userID2='" + loginName+"'";
+            resultSet = statement.executeQuery(query);
+            counter = 0;
+            while (resultSet.next()) {
+                counter++;
+
+                usersFriends.add(resultSet.getString(1));
+            }
+            for(String friendName:usersFriends){
+                query = "SELECT * FROM friends where userID1='" + friendName + "'";
+                resultSet = statement.executeQuery(query);
+                counter = 0;
+                while (resultSet.next()) {
+                    counter++;
+                    if(!resultSet.getString(2).equals(loginName)) {
+                        friendsFriends.add(resultSet.getString(2));
+                    }
+
+
+                }
+                query = "SELECT * FROM friends where userID2='" + friendName + "'";
+                resultSet = statement.executeQuery(query);
+                counter = 0;
+                while (resultSet.next()) {
+                    counter++;
+
+                    if(!resultSet.getString(1).equals(loginName)) {
+                        friendsFriends.add(resultSet.getString(1));
+                    }
+                }
+            }
+            System.out.println("Your friends: "+usersFriends.toString());
+            System.out.println("Friends friends: "+friendsFriends.toString());
+            if(counter>=1){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception Ex) {
+            System.out.println("Error Display friends querey.  Machine Error: " +
+                    Ex.toString());
+        }
+        return false;
+
+
+    }
     public void closeConnection(){
         try {
             connection.close();
@@ -321,8 +388,10 @@ public class UsersStuff {
             System.out.println("Invalid username or password");
         }
         */
-        users.initiateFriendship("zab30","zblouse","Hello friend. Please accept my request");
-        users.confirmFriendship("zblouse","zab30");
+        //users.initiateFriendship("zab30","uav97","Hello friend. Please accept my request");
+        //users.confirmFriendship("uav97","zab30");
+        users.displayFriends("zab30");
+        users.displayFriends("uav97");
         users.closeConnection();
 
     }

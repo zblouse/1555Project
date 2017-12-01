@@ -14,10 +14,10 @@
       <file leaf-file-name="UsersStuff.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UsersStuff.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="269" column="80" lean-forward="false" selection-start-line="269" selection-start-column="80" selection-end-line="269" selection-end-column="80" />
+            <state relative-caret-position="441">
+              <caret line="340" column="45" lean-forward="false" selection-start-line="340" selection-start-column="45" selection-end-line="340" selection-end-column="45" />
               <folding>
-                <element signature="e#0#12977#0" expanded="true" />
+                <element signature="e#0#15575#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -37,7 +37,7 @@
       <file leaf-file-name="dbCreate.sql" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dbCreate.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-276">
+            <state relative-caret-position="-36">
               <caret line="16" column="10" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="10" />
               <folding />
             </state>
@@ -320,7 +320,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dbCreate.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-276">
+        <state relative-caret-position="-36">
           <caret line="16" column="10" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="10" />
           <folding />
         </state>
@@ -328,10 +328,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/UsersStuff.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="269" column="80" lean-forward="false" selection-start-line="269" selection-start-column="80" selection-end-line="269" selection-end-column="80" />
+        <state relative-caret-position="441">
+          <caret line="340" column="45" lean-forward="false" selection-start-line="340" selection-start-column="45" selection-end-line="340" selection-end-column="45" />
           <folding>
-            <element signature="e#0#12977#0" expanded="true" />
+            <element signature="e#0#15575#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
