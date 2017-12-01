@@ -409,6 +409,91 @@ public class UsersStuff {
         }
         return null;
     }
+
+
+    public boolean sendMessageToUser(String sendingUser, String receivingUser, String message){
+        System.out.println("Attempting to send a message to a user");
+        try {
+            statement = connection.createStatement();
+            String date = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+            java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+            java.sql.Date today = new java.sql.Date(df.parse(date).getTime());
+            query = "SELECT count(*) AS numMgs FROM messages";
+
+            resultSet = statement.executeQuery(query);
+
+            int counter = 0;
+            int numMessages=0;
+            while (resultSet.next()) {
+                counter++;
+                numMessages = resultSet.getInt(1)+1;
+            }
+
+            query = "insert into messages values (?,?,?,?,?,?)";
+
+            PreparedStatement updateStatement = connection.prepareStatement(query);
+            updateStatement.setString(1, String.valueOf(numMessages));
+            updateStatement.setString(2, sendingUser);
+            updateStatement.setString(3,message);
+            updateStatement.setString(4, receivingUser);
+            updateStatement.setString(5,  null);
+            updateStatement.setDate(6,today);
+
+            updateStatement.executeUpdate();
+
+            return true;
+      /* We can also so the insert statement directly as follows:
+
+       query = "INSERT INTO Test VALUES ('Tester', 111111112, '1/Nov/03')";
+      int result = statement.executeUpdate(query); //executing update returns
+      //either the row count for INSERT, UPDATE or DELETE or 0 for SQL
+      //statements that return nothing
+
+      */
+
+
+
+        } catch (Exception Ex) {
+            System.out.println("Error sending message to user.  Machine Error: " +
+                    Ex.toString());
+        }
+
+
+
+        return true;
+    }
+    public boolean displayMessages(String thisName){
+        try {
+            statement = connection.createStatement(); //create an instance
+
+            ArrayList<Message> theMessages = new ArrayList<Message>();
+            System.out.println("******Attempting to Display messages******");
+            query = "SELECT * FROM messages where toUserID='" + thisName +"'";
+            resultSet = statement.executeQuery(query);
+            int counter = 0;
+            while (resultSet.next()) {
+                counter++;
+                theMessages.add(new Message(resultSet.getString(2),resultSet.getString(4),resultSet.getString(3)));
+
+            }
+            if(counter>=1){
+                for(Message item:theMessages){
+                    System.out.println("From: "+item.getFromUser()+" Message: "+item.getMessage());
+                }
+                return true;
+
+            }else{
+                return false;
+            }
+        }catch(Exception Ex) {
+            System.out.println("Error retreiving messages.  Machine Error: " +
+                    Ex.toString());
+        }
+        return false;
+    }
+
+    //close the connection to the db
     public void closeConnection(){
         try {
             connection.close();
@@ -445,7 +530,10 @@ public class UsersStuff {
         //users.displayFriends("uav97");
         //User thisUser= users.retrieveProfile("zab30");
         //System.out.println("Retrieved user: "+thisUser.getName());
-        users.userLogOut("zab30");
+        //users.userLogOut("zab30");
+        users.sendMessageToUser("zab30","uav97","Hi");
+        users.sendMessageToUser("zblouse","uav97","Whats up");
+        users.displayMessages("uav97");
         users.closeConnection();
 
     }
