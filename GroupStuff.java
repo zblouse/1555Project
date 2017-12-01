@@ -1,42 +1,19 @@
-/*
-    Here is an example of connecting to a database using jdbc
 
-    The table we will use in the example is
-    Table Test(
-       name     varchar(30),
-       ssn      number(10),
-       bday     date
-    );
-
-    For demostratration purpose, insert two records into this table:
-    ( 'Mike', 123456789, '09/Nov/03' )
-    ( 'Amy', 987654321, '10/Nov/03' )
-
-    Written by: Jonathan Beaver, modified by Thao Pham
-    Purpose: Demo JDBC for CS1555 Class
-
-    IMPORTANT (otherwise, your code may not compile)
-    Same as using sqlplus, you need to set oracle environment variables by
-    sourcing bash.env or tcsh.env
-*/
-
-import java.sql.*;  //import the file containing definitions for the parts
-//needed by java for database connection and manipulation
-
-public class JavaDemo {
-    private Connection connection; //used to hold the jdbc connection to the DB
+import java.sql.*;
+public class GroupStuff
+{
+	private Connection connection; //used to hold the jdbc connection to the DB
     private Statement statement; //used to create an instance of the connection
     private ResultSet resultSet; //used to hold the result of your query (if one
     // exists)
     private String query;  //this will hold the query we are using
     private String username, password;
-
-    public JavaDemo() {
+    public GroupStuff() {
     /*Making a connection to a DB causes certian exceptions.  In order to handle
     these, you either put the DB stuff in a try block or have your function
     throw the Execptions and handle them later.  For this demo I will use the
     try blocks*/
-        username = "zab3"; //This is your username in oracle
+        username = "zab30"; //This is your username in oracle
         password = "3970513"; //This is your password in oracle
         try {
             //Register the oracle driver.  This needs the oracle files provided
@@ -55,13 +32,12 @@ public class JavaDemo {
                     Ex.toString());
             Ex.printStackTrace();
         }
-
-        int counter = 1;
-    /*We will now perform a simple query to the database, asking it for all the
-    records it has.  For your project, performing queries will be similar*/
+	}
+	public boolean createGroup(){
+	int counter = 1;
         try {
             statement = connection.createStatement(); //create an instance
-            query = "SELECT * FROM Test"; //sample query one
+            query = "SELECT * FROM Groups"; //sample query one
 
             resultSet = statement.executeQuery(query); //run the query on the DB table
       /*the results in resultSet have an odd quality.  The first row in result
@@ -79,29 +55,30 @@ public class JavaDemo {
                         //Notice the one, that is the
                         //position of the answer in the
                         //resulting table
-                        resultSet.getLong(2) + ", " +   //since second item was number(10),
+                        resultSet.getString(2) + ", " +   //since second item was number(10),
                         //we use getLong to access it
-                        resultSet.getDate(3)); //since type date, getDate.
+                        resultSet.getString(3)); //since type date, getDate.
                 counter++;
             }
 
 
       /*Now, we show an insert, using preparedStatement. Of course for this you can also write the query directly as the above case with select, and vice versa. */
 
-            String name = "tester 2";
-            long ssn = 111111113;
+            String groupName="TestNameI";
+			String groupID="TestIDI";
+			String description="TestDesc";
 
 
-            java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd");
+           // java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd");
 
-            java.sql.Date bday = new java.sql.Date(df.parse("1990-01-20").getTime());
+            //java.sql.Date bday = new java.sql.Date(df.parse("1990-01-20").getTime());
 
-            query = "insert into Test values (?,?,?)";
+            query = "insert into Groups values (?,?,?)";
 
             PreparedStatement updateStatement = connection.prepareStatement(query);
-            updateStatement.setString(1, name);
-            updateStatement.setLong(2, ssn);
-            updateStatement.setDate(3, bday);
+            updateStatement.setString(1, groupName);
+            updateStatement.setString(2, groupID);
+            updateStatement.setString(3, description);
 
             updateStatement.executeUpdate();
 
@@ -117,15 +94,15 @@ public class JavaDemo {
 
             //I will show the insert worked by selecting the content of the table again
             //statement = connection.createStatement();
-            query = "SELECT * FROM Test";
+            query = "SELECT * FROM Groups";
             resultSet = statement.executeQuery(query);
             System.out.println("\nAfter the insert, data is...\n");
             counter = 1;
             while (resultSet.next()) {
                 System.out.println("Record " + counter + ": " +
                         resultSet.getString(1) + ", " +
-                        resultSet.getLong(2) + ", " +
-                        resultSet.getDate(3));
+                        resultSet.getString(2) + ", " +
+                        resultSet.getString(3));
                 counter++;
             }
 
@@ -137,9 +114,35 @@ public class JavaDemo {
         }
 
         System.out.println("Good Luck");
+        return true;
     }
+	
+	
+	public boolean initiateAddingGroup(String uID, String gID)
+	{
+		try {
+			int limit;
+            statement = connection.createStatement(); //create an instance
+            query = "SELECT grouplimit FROM Groups WHERE groupId = '"+gID+"'"; //sample query one
+            ResultSet gLimit = statement.executeQuery(query); //run the query on the DB table
+			limit = gLimmit.getInt("grouplimit");
+            query = "SELECT COUNT(*) AS numMems FROM groupMembership WHERE gID = '"+gID+"'";
+            resultSet = statement.executeQuery(query);
+       
 
-    public static void main(String args[]) {
-        JavaDemo demo = new JavaDemo();
+            connection.close();
+
+        } catch (Exception Ex) {
+            System.out.println("Error running the sample queries.  Machine Error: " +
+                    Ex.toString());
+        }
+
+        System.out.println("Good Luck");
+        return true;
+    }
+	}
+	public static void main(String args[]) {
+        GroupStuff demo = new GroupStuff();
+        demo.createGroup();
     }
 }

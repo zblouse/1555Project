@@ -36,6 +36,7 @@ CREATE TABLE groups(
 	gID varchar2(20),
 	name varchar2(50),
 	description varchar2(200),
+	memberLimit integer, 
 	CONSTRAINT groups_pk PRIMARY KEY (gID)
 );
 
