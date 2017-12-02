@@ -341,7 +341,59 @@ public class GroupStuff
         }
 	}
 	
-	public boolean sendMessageToGroup()
+	public boolean sendMessageToGroup(String sendingUser, String receivingGroup, String message)
+	{
+		try {
+            statement = connection.createStatement();
+            String date = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+            java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+            java.sql.Date today = new java.sql.Date(df.parse(date).getTime());
+            query = "SELECT count(*) AS numMgs FROM messages";
+
+            resultSet = statement.executeQuery(query);
+
+            int counter = 0;
+            int numMessages=0;
+            while (resultSet.next()) {
+                counter++;
+                numMessages = resultSet.getInt(1)+1;
+            }
+
+            query = "insert into messages values (?,?,?,?,?,?)";
+
+            PreparedStatement updateStatement = connection.prepareStatement(query);
+            updateStatement.setString(1, String.valueOf(numMessages));
+            updateStatement.setString(2, sendingUser);
+            updateStatement.setString(3,message);
+            updateStatement.setString(4, null);
+            updateStatement.setString(5,  receivingGroup);
+            updateStatement.setDate(6,today);
+
+            updateStatement.executeUpdate();
+
+            return true;
+      /* We can also so the insert statement directly as follows:
+
+       query = "INSERT INTO Test VALUES ('Tester', 111111112, '1/Nov/03')";
+      int result = statement.executeUpdate(query); //executing update returns
+      //either the row count for INSERT, UPDATE or DELETE or 0 for SQL
+      //statements that return nothing
+
+      */
+
+
+
+        } catch (Exception Ex) {
+            System.out.println("Error sending message to user.  Machine Error: " +
+                    Ex.toString());
+        }
+
+
+
+        return true;
+    }
+	}
 	
 	public void closeConnection(){
         try {
@@ -359,7 +411,7 @@ public class GroupStuff
 		//demo.confirmMembership("uav97","trying ssdfsdhard");
 		//System.out.println(demo.searchForUser("uav97 zab30"));
 		//System.out.println(demo.threeDegrees("uav97", "zab32"));
-		demo.dropUser("zab33");
+		//demo.dropUser("zab33");
 		demo.closeConnection();
 		
 		

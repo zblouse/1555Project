@@ -121,3 +121,11 @@ CREATE OR REPLACE TRIGGER Message_Group
 			INSERT INTO messageRecipient Values(:new.msgID, (SELECT userID FROM groupmembership WHERE gID = :new.toGroupID));
 		END;
 /
+CREATE OR REPLACE TRIGGER Message_Recipient_Populator
+	BEFORE INSERT ON messages
+	FOR EACH ROW
+	WHEN(new.toUserID IS NOT NULL)
+		BEGIN
+			INSERT INTO messageRecipient Values(:new.msgID, :new.toUserID);
+		END;
+/
