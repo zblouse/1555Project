@@ -179,7 +179,7 @@ public class UsersStuff {
             updateStatement.setTimestamp(1, currentStamp);
             updateStatement.setString(2, username);
             updateStatement.executeUpdate();
-
+            closeConnection();
             System.exit(0);
         }catch(Exception Ex) {
             System.out.println("Error logout user querey.  Machine Error: " +
@@ -492,6 +492,58 @@ public class UsersStuff {
         }
         return false;
     }
+    public boolean displayNewMessages(String thisName){
+        try {
+            statement = connection.createStatement(); //create an instance
+
+            System.out.println("******Attempting to Display messages******");
+            query = "SELECT lastlogin FROM profile where userID='" + thisName +"'";
+            resultSet = statement.executeQuery(query);
+            int counter = 0;
+            String lastLogin= "no";
+            while (resultSet.next()) {
+                counter++;
+                lastLogin = new SimpleDateFormat("yyyy-MM-dd").format(resultSet.getTimestamp(1));
+
+            }
+            if(lastLogin.equals("no")){
+                return false;
+            }else {
+                System.out.println("******Attempting to Display messages******");
+                java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+                java.sql.Date loginDate = new java.sql.Date(df.parse(lastLogin).getTime());
+                query = "SELECT * FROM messages where toUserID= ? AND dateSent > ?";
+                PreparedStatement updateStatement = connection.prepareStatement(query);
+                updateStatement.setString(1, thisName);
+                updateStatement.setDate(2,loginDate);
+
+                resultSet = updateStatement.executeQuery();
+                ArrayList<Message> theMessages = new ArrayList<Message>();
+
+
+                counter = 0;
+                while (resultSet.next()) {
+                    counter++;
+                    theMessages.add(new Message(resultSet.getString(2), resultSet.getString(4), resultSet.getString(3)));
+
+                }
+                if (counter >= 1) {
+                    for (Message item : theMessages) {
+                        System.out.println("From: " + item.getFromUser() + " Message: " + item.getMessage());
+                    }
+                    return true;
+
+                } else {
+                    return false;
+                }
+            }
+        }catch(Exception Ex) {
+            System.out.println("Error retreiving messages.  Machine Error: " +
+                    Ex.toString());
+        }
+        return false;
+    }
 
     //close the connection to the db
     public void closeConnection(){
@@ -530,10 +582,10 @@ public class UsersStuff {
         //users.displayFriends("uav97");
         //User thisUser= users.retrieveProfile("zab30");
         //System.out.println("Retrieved user: "+thisUser.getName());
-        //users.userLogOut("zab30");
-        users.sendMessageToUser("zab30","uav97","Hi");
-        users.sendMessageToUser("zblouse","uav97","Whats up");
-        users.displayMessages("uav97");
+        //users.userLogOut("uav97");
+        //users.sendMessageToUser("zab30","uav97","Hi");
+        //users.sendMessageToUser("zblouse","uav97","Whats up");
+        users.displayNewMessages("uav97");
         users.closeConnection();
 
     }

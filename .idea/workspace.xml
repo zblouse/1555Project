@@ -14,10 +14,10 @@
       <file leaf-file-name="UsersStuff.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UsersStuff.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="435" column="67" lean-forward="false" selection-start-line="435" selection-start-column="67" selection-end-line="435" selection-end-column="67" />
+            <state relative-caret-position="449">
+              <caret line="532" column="107" lean-forward="false" selection-start-line="532" selection-start-column="107" selection-end-line="532" selection-end-column="107" />
               <folding>
-                <element signature="e#0#20985#0" expanded="true" />
+                <element signature="e#0#23185#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -78,7 +78,7 @@
       <file leaf-file-name="dbCreate.sql" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dbCreate.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="918">
+            <state relative-caret-position="315">
               <caret line="54" column="33" lean-forward="true" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
               <folding />
             </state>
@@ -93,9 +93,10 @@
       <find>resultSet</find>
       <find>statement</find>
       <find>sentme</find>
-      <find>count</find>
       <find>state</find>
       <find>message</find>
+      <find>count</find>
+      <find>logout</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -365,14 +366,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GroupStuff.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="139" column="68" lean-forward="true" selection-start-line="139" selection-start-column="68" selection-end-line="139" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -382,6 +375,22 @@
             <element signature="e#475#476#0" expanded="true" />
             <element signature="e#493#494#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GroupStuff.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="139" column="68" lean-forward="true" selection-start-line="139" selection-start-column="68" selection-end-line="139" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dbCreate.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="54" column="33" lean-forward="true" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -400,20 +409,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dbCreate.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="54" column="33" lean-forward="true" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UsersStuff.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="435" column="67" lean-forward="false" selection-start-line="435" selection-start-column="67" selection-end-line="435" selection-end-column="67" />
+        <state relative-caret-position="449">
+          <caret line="532" column="107" lean-forward="false" selection-start-line="532" selection-start-column="107" selection-end-line="532" selection-end-column="107" />
           <folding>
-            <element signature="e#0#20985#0" expanded="true" />
+            <element signature="e#0#23185#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
