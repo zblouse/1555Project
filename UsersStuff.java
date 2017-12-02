@@ -544,7 +544,7 @@ public class UsersStuff {
         }
         return false;
     }
-
+    
     //close the connection to the db
     public void closeConnection(){
         try {
@@ -557,11 +557,11 @@ public class UsersStuff {
     public static void main(String args[]) {
         UsersStuff users = new UsersStuff();
         Timestamp blankStamp = new Timestamp(87);
-        /*
-        users.createUser("zab30","Zach Blouse","adminPass","zab30@pitt.edu","1996-05-19",blankStamp);
-        users.createUser("zblouse","Zach Blouse","adminPass","zab30@pitt.edu","1996-05-19",blankStamp);
-        users.createUser("uav97","Unidentified","adminPass","uav97@pitt.edu","1002-01-12",blankStamp);
-        */
+
+       // users.createUser("zab31","Zach Blouse","adminPass","zab31@pitt.edu","1996-05-19",blankStamp);
+        //users.createUser("zab32","Zach Blouse","adminPass","zab32@pitt.edu","1996-05-19",blankStamp);
+        //users.createUser("zab33","Unidentified","adminPass","zab33@pitt.edu","1002-01-12",blankStamp);
+
         /*
         Boolean validLogin=users.userLogin("zab30","adminPass");
         if(validLogin){
@@ -576,8 +576,12 @@ public class UsersStuff {
             System.out.println("Invalid username or password");
         }
         */
-        //users.initiateFriendship("zab30","uav97","Hello friend. Please accept my request");
-        //users.confirmFriendship("uav97","zab30");
+        //users.initiateFriendship("uav97","zab31","Hello friend. Please accept my request");
+        //users.confirmFriendship("zab31","uav97");
+        //users.initiateFriendship("zab31","zab32","Hello friend. Please accept my request");
+        //users.confirmFriendship("zab32","zab31");
+        //users.initiateFriendship("zab32","zab33","Hello friend. Please accept my request");
+        //users.confirmFriendship("zab33","zab32");
         //users.displayFriends("zab30");
         //users.displayFriends("uav97");
         //User thisUser= users.retrieveProfile("zab30");
@@ -585,7 +589,7 @@ public class UsersStuff {
         //users.userLogOut("uav97");
         //users.sendMessageToUser("zab30","uav97","Hi");
         //users.sendMessageToUser("zblouse","uav97","Whats up");
-        users.displayNewMessages("uav97");
+        //users.displayNewMessages("uav97");
         users.closeConnection();
 
     }
