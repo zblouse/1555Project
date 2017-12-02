@@ -544,7 +544,29 @@ public class UsersStuff {
         }
         return false;
     }
-    
+    public void topMessages(int k, int months){
+        try {
+            statement = connection.createStatement(); //create an instance
+
+            System.out.println("******Attempting to Display Top Messagers******");
+            query = "Select * from(SELECT fromID, count(*) as cnt FROM messages where dateSent>add_months(sysdate,-"+months+") group by fromID) where rownum<="+k;
+            resultSet = statement.executeQuery(query);
+            int counter = 0;
+
+            while (resultSet.next()) {
+                counter++;
+                System.out.println("User: "+resultSet.getString(1)+" sent messages: "+resultSet.getInt(2));
+
+            }
+
+
+        }catch(Exception Ex) {
+            System.out.println("Error retreiving top messages.  Machine Error: " +
+                    Ex.toString());
+        }
+
+    }
+
     //close the connection to the db
     public void closeConnection(){
         try {
@@ -590,6 +612,7 @@ public class UsersStuff {
         //users.sendMessageToUser("zab30","uav97","Hi");
         //users.sendMessageToUser("zblouse","uav97","Whats up");
         //users.displayNewMessages("uav97");
+        users.topMessages(2,4);
         users.closeConnection();
 
     }
