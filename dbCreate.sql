@@ -100,3 +100,24 @@ CREATE OR REPLACE TRIGGER Remove_From_Pending_Groups
 		DELETE FROM pendingGroupmembers WHERE gID = :new.gID AND userID = :new.userID;
 	END;
 /
+CREATE OR REPLACE TRIGGER Remove_User
+  BEFORE DELETE ON profile
+  REFERENCING OLD AS oldprof
+  FOR EACH ROW
+	BEGIN
+		DELETE FROM Friends WHERE userID1 = :oldprof.userID OR userID2 = :oldprof.userID;
+		DELETE FROM pendingFriends WHERE fromID = :oldprof.userID OR toID = :oldprof.userID;
+		DELETE FROM messages WHERE (fromID = :oldprof.userID AND touserID = NULL)OR(touserID = :oldprof.userID AND fromID = NULL);
+		DELETE FROM messageRecipient WHERE userID = :oldprof.userID;
+		DELETE FROM pendingGroupMembers WHERE userID = :oldprof.userID;
+		DELETE FROM groupMembership WHERE userID = :oldprof.userID;
+	END;
+/
+CREATE OR REPLACE TRIGGER Message_Group
+	BEFORE INSERT ON messages
+	FOR EACH ROW
+	WHEN(new.togroupID IS NOT NULL)
+		BEGIN
+			INSERT INTO messageRecipient Values(:new.msgID, (SELECT userID FROM groupmembership WHERE gID = :new.toGroupID));
+		END;
+/

@@ -1,5 +1,6 @@
 
 import java.sql.*;
+import java.util.ArrayList;
 public class GroupStuff
 {
 	private static Connection connection; //used to hold the jdbc connection to the DB
@@ -228,6 +229,120 @@ public class GroupStuff
 		return true;
 	}
 	
+	public ArrayList<String> searchForUser(String searcher)
+	{
+		try{
+		ArrayList<String> results = new ArrayList<String>();
+		statement=connection.createStatement();
+		String[] searchTerms = searcher.split(" ");
+		for(int i=0;i<searchTerms.length;i++)
+		{
+			query = "Select userID From profile WHERE userID = '"+searchTerms[i]+"'";
+			resultSet = statement.executeQuery(query);
+			while(resultSet.next())
+			{
+				if(!results.contains(resultSet.getString(1)))
+				results.add(resultSet.getString(1));
+			}
+		}
+		return results;
+		
+		
+		}catch (Exception Ex) {
+            System.out.println("Error running the sample queries.  Machine Error: " +
+                    Ex.toString());
+        }
+		return null;
+	}
+	
+	public ArrayList<String> threeDegrees(String userA, String userB)
+	{
+		
+		ArrayList<String> results = new ArrayList<String>();
+		ArrayList<String> friendsList = getFriendsList(userA);
+		
+		results.add(userA);
+			if(friendsList.contains(userB))
+			{
+				
+				return results;
+			} else
+			{
+				for(int i=0;i<friendsList.size();i++)
+				{
+					ArrayList<String> fl2 = getFriendsList(friendsList.get(i));
+					System.out.println(fl2);
+					if(fl2.contains(userB)){
+						results.add(friendsList.get(i));
+						return results;
+					
+					}else{
+						for(int j=0;j<fl2.size();j++)
+						{
+							ArrayList<String> fl3 = getFriendsList(fl2.get(j));
+							if(fl3.contains(userB))
+							{
+								results.add(friendsList.get(i));
+								results.add(fl2.get(j));
+								return results;
+							} else{
+								for(int k =0;k<fl3.size();k++)
+								{
+									ArrayList<String> fl4 = getFriendsList(fl3.get(k));
+								if(fl4.contains(userB))
+								{
+									results.add(friendsList.get(i));
+									results.add(fl2.get(j));
+									results.add(fl3.get(k));
+									return results;
+								}
+								}
+							}
+						}
+					}
+				}
+			}
+		return null;
+	}
+	private ArrayList<String> getFriendsList(String user)
+	{
+		ArrayList<String> usersFriends = new ArrayList<String>();
+		try{
+			statement = connection.createStatement();
+			query = "SELECT * FROM friends where userID1='" + user + "'";
+            resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                usersFriends.add(resultSet.getString(2));
+            }
+            query = "SELECT * FROM friends where userID2='" + user+"'";
+            resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                usersFriends.add(resultSet.getString(1));
+            }
+			return usersFriends;
+		}catch (Exception Ex) {
+            System.out.println("Error running the sample queries.  Machine Error: " +
+                    Ex.toString());
+        }
+		return usersFriends;
+	}
+	
+	public boolean dropUser(String user)
+	{
+		try{
+			statement = connection.createStatement();
+			query = "DELETE FROM profile where userID = '"+user+"'";
+			statement.executeQuery(query);
+			return true;
+			}catch(Exception Ex) {
+            System.out.println("Error running sample queries.  Machine Error: " +
+                    Ex.toString());
+					return false;
+        }
+	}
+	
+	public boolean sendMessageToGroup()
+	
 	public void closeConnection(){
         try {
             connection.close();
@@ -241,7 +356,13 @@ public class GroupStuff
         GroupStuff demo = new GroupStuff();
         //demo.createGroup("zab30","trying ssdfsdhard","testDesc", 5);
 		//demo.initiateAddingGroup("uav97","trying ssdfsdhard", "hi");
-		demo.confirmMembership("uav97","trying ssdfsdhard");
+		//demo.confirmMembership("uav97","trying ssdfsdhard");
+		//System.out.println(demo.searchForUser("uav97 zab30"));
+		//System.out.println(demo.threeDegrees("uav97", "zab32"));
+		demo.dropUser("zab33");
 		demo.closeConnection();
+		
+		
+		
     }
 }
