@@ -24,6 +24,7 @@ import java.sql.*;  //import the file containing definitions for the parts
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 //needed by java for database connection and manipulation
 
 public class UsersStuff {
@@ -547,17 +548,30 @@ public class UsersStuff {
     public void topMessages(int k, int months){
         try {
             statement = connection.createStatement(); //create an instance
-
+            //Hashmap<String,int> messageCounts = new Hashmap<String,int>();
             System.out.println("******Attempting to Display Top Messagers******");
-            query = "Select * from(SELECT fromID, count(*) as cnt FROM messages where dateSent>add_months(sysdate,-"+months+") group by fromID) where rownum<="+k;
+            query = "select * from (SELECT fromID, count(*) as cnt FROM messages where dateSent>add_months(sysdate,-"+months+") group by fromID order by count(*) desc)where rownum<="+k;
             resultSet = statement.executeQuery(query);
             int counter = 0;
 
             while (resultSet.next()) {
                 counter++;
-                System.out.println("User: "+resultSet.getString(1)+" sent messages: "+resultSet.getInt(2));
-
+                System.out.println("Name: "+resultSet.getString(1)+"Messages: "+resultSet.getInt(2));
             }
+            //query = "SELECT toID, count(*) as cnt FROM messages where dateSent>add_months(sysdate,-"+months+") group by toID";
+            //query="Select * from( Select fromID,sentCnt+receivedCnt from (SELECT fromID, count(*) as sentCnt FROM messages where dateSent>add_months(sysdate,-"+months+") group by fromID)sent inner join (SELECT toUserID, count(*) as receivedCnt FROM messages where dateSent>add_months(sysdate,-"+months+") group by toUserID)received ON sent.fromID=received.toUserID order by sentCnt+receivedCnt)where rownum<"+k;
+            resultSet = statement.executeQuery(query);
+            counter = 0;
+
+            while (resultSet.next()) {
+                counter++;
+                /*
+                int totalMessages= messageCounts.get(resultSet.getString(1))+resultSet.getInt(2);
+                messageCounts.replace(resultSet.getString(1),totalMessages);
+                */
+                //System.out.println("Name: "+resultSet.getString(1)+"Messages: "+resultSet.getInt(2));
+            }
+
 
 
         }catch(Exception Ex) {

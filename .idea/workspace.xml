@@ -55,9 +55,11 @@
       <file leaf-file-name="GroupStuff.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GroupStuff.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="139" column="68" lean-forward="true" selection-start-line="139" selection-start-column="68" selection-end-line="139" selection-end-column="68" />
-              <folding />
+            <state relative-caret-position="388">
+              <caret line="140" column="68" lean-forward="true" selection-start-line="140" selection-start-column="68" selection-end-line="140" selection-end-column="68" />
+              <folding>
+                <marker date="1512178534393" expanded="true" signature="14609:14615" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -75,10 +77,10 @@
       <file leaf-file-name="UsersStuff.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UsersStuff.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="558" column="0" lean-forward="true" selection-start-line="558" selection-start-column="0" selection-end-line="558" selection-end-column="0" />
+            <state relative-caret-position="113">
+              <caret line="552" column="166" lean-forward="false" selection-start-line="552" selection-start-column="166" selection-end-line="552" selection-end-column="166" />
               <folding>
-                <element signature="e#0#24322#0" expanded="true" />
+                <element signature="e#0#25462#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -358,14 +360,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GroupStuff.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="139" column="68" lean-forward="true" selection-start-line="139" selection-start-column="68" selection-end-line="139" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -401,6 +395,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/GroupStuff.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="140" column="68" lean-forward="true" selection-start-line="140" selection-start-column="68" selection-end-line="140" selection-end-column="68" />
+          <folding>
+            <marker date="1512178534393" expanded="true" signature="14609:14615" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dbCreate.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -411,10 +415,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/UsersStuff.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="558" column="0" lean-forward="true" selection-start-line="558" selection-start-column="0" selection-end-line="558" selection-end-column="0" />
+        <state relative-caret-position="113">
+          <caret line="552" column="166" lean-forward="false" selection-start-line="552" selection-start-column="166" selection-end-line="552" selection-end-column="166" />
           <folding>
-            <element signature="e#0#24322#0" expanded="true" />
+            <element signature="e#0#25462#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
