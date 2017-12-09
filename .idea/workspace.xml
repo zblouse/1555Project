@@ -11,25 +11,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Phase2Java.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Phase2Java.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Phase2Java.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="26" />
-              <folding />
+            <state relative-caret-position="340">
+              <caret line="67" column="70" lean-forward="true" selection-start-line="67" selection-start-column="70" selection-end-line="67" selection-end-column="70" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Driver.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Driver.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Driver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="43" column="84" lean-forward="false" selection-start-line="43" selection-start-column="84" selection-end-line="43" selection-end-column="84" />
+            <state relative-caret-position="277">
+              <caret line="38" column="49" lean-forward="true" selection-start-line="38" selection-start-column="49" selection-end-line="38" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#274#275#0" expanded="true" />
-                <element signature="e#321#322#0" expanded="true" />
+                <element signature="e#293#294#0" expanded="true" />
+                <element signature="e#340#341#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -48,6 +50,7 @@
       <find>logout</find>
       <find>count</find>
       <find>phase</find>
+      <find>timeStamp</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -69,8 +72,8 @@
         <option value="$PROJECT_DIR$/User.java" />
         <option value="$PROJECT_DIR$/message.java" />
         <option value="$PROJECT_DIR$/Message.java" />
-        <option value="$PROJECT_DIR$/Phase2Java.java" />
         <option value="$PROJECT_DIR$/UsersStuff.java" />
+        <option value="$PROJECT_DIR$/Phase2Java.java" />
         <option value="$PROJECT_DIR$/Driver.java" />
       </list>
     </option>
@@ -391,7 +394,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="25" lean-forward="true" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -486,23 +491,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Driver.java">
+    <entry file="file://$PROJECT_DIR$/Phase2Java.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="43" column="84" lean-forward="false" selection-start-line="43" selection-start-column="84" selection-end-line="43" selection-end-column="84" />
+        <state relative-caret-position="340">
+          <caret line="67" column="70" lean-forward="true" selection-start-line="67" selection-start-column="70" selection-end-line="67" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#274#275#0" expanded="true" />
-            <element signature="e#321#322#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Phase2Java.java">
+    <entry file="file://$PROJECT_DIR$/Driver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="26" />
-          <folding />
+        <state relative-caret-position="277">
+          <caret line="38" column="49" lean-forward="true" selection-start-line="38" selection-start-column="49" selection-end-line="38" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#293#294#0" expanded="true" />
+            <element signature="e#340#341#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

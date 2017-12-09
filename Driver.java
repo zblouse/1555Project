@@ -1,6 +1,7 @@
 //Jacob Winkler and Zach Blouse
 import java.util.Scanner;
 import java.util.Calendar;
+import java.sql.*;
 public class Driver{
     private boolean loggedIn=false;
     private Scanner keyboard = new Scanner(System.in);
@@ -32,6 +33,8 @@ public class Driver{
     }
     public boolean createUser(){
         //String username, String name, String password, String email, String dob, Timestamp stamp
+        System.out.println("Please Enter Your Name");
+        String newName = keyboard.nextLine();
         System.out.println("Please Enter Desired Username");
         String newUsername = keyboard.nextLine();
         System.out.println("Please Enter Your Password");
@@ -41,7 +44,15 @@ public class Driver{
         System.out.println("Please enter your Date of Birth in the form YYYY-MM-DD");
         String newBirth = keyboard.nextLine();
         Timestamp blankStamp = new Timestamp(87);
-        connection.createUser(newUsername,newPassword,newEmail,newBirth,blankStamp);
+
+        return connection.createUser(newUsername,newName,newPassword,newEmail,newBirth,blankStamp);
+    }
+    public boolean loginPrompt(){
+        System.out.println("Username");
+        String newUsername = keyboard.nextLine();
+        System.out.println("Password");
+        String newPassword = keyboard.nextLine();
+        boolean validLogin = connection.
     }
 
 }

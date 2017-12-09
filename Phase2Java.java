@@ -75,6 +75,7 @@ public class Phase2Java{
         } catch (Exception Ex) {
             System.out.println("Error running the Create user Querey.  Machine Error: " +
                     Ex.toString());
+            return false;
         }
         try {
 
@@ -104,6 +105,7 @@ public class Phase2Java{
         } catch (Exception Ex) {
             System.out.println("Error reading Create user querey.  Machine Error: " +
                     Ex.toString());
+            return false;
         }
 
 
