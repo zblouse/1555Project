@@ -301,16 +301,16 @@ INSERT into friends VALUES('ZachVersi','ZachHabsburg', TO_DATE('10-NOV-17'),'Hi'
 INSERT into friends VALUES('ZachVersi','ZachDinkle', TO_DATE('10-NOV-17'),'Hi');
 INSERT into friends VALUES('ZachVersi','ZachSquare', TO_DATE('10-NOV-17'),'Hi');
 
-INSERT into groups VALUES('0','0','0');
-INSERT into groups VALUES('1','1','1');
-INSERT into groups VALUES('2','2','2');
-INSERT into groups VALUES('3','3','3');
-INSERT into groups VALUES('4','4','4');
-INSERT into groups VALUES('5','5','5');
-INSERT into groups VALUES('6','6','6');
-INSERT into groups VALUES('7','7','7');
-INSERT into groups VALUES('8','8','8');
-INSERT into groups VALUES('9','9','9');
+INSERT into groups VALUES('0','0','0','200');
+INSERT into groups VALUES('1','1','1','200');
+INSERT into groups VALUES('2','2','2','200');
+INSERT into groups VALUES('3','3','3','200');
+INSERT into groups VALUES('4','4','4','200');
+INSERT into groups VALUES('5','5','5','200');
+INSERT into groups VALUES('6','6','6','200');
+INSERT into groups VALUES('7','7','7','200');
+INSERT into groups VALUES('8','8','8','200');
+INSERT into groups VALUES('9','9','9','200');
 
 INSERT into messages VALUES('0','ZachSmith','We are the knights who say ni','ZachJohnson',NULL,TO_DATE('10-NOV-17'));
 INSERT into messages VALUES('1','ZachSmith','We are the knights who say ni','ZachJohnson',NULL,TO_DATE('10-NOV-17'));
