@@ -310,6 +310,25 @@ public class Phase2Java{
             return pendingRequests;
         }
     }
+	
+	public HashMap<Integer,String> getGroupRequests(String groupName){
+        HashMap<Integer,String> pendingRequests = new HashMap<Integer,String>();
+        try {
+            query = "SELECT * FROM pendingFriends where gID='" + groupName + "'";
+            resultSet = statement.executeQuery(query);
+            int counter = 0;
+            while (resultSet.next()) {
+                counter++;
+                pendingRequests.put(counter, resultSet.getString(1));
+            }
+            return pendingRequests;
+        }catch(Exception Ex) {
+            System.out.println("Error confirm friend.  Machine Error: " +
+                    Ex.toString());
+            return pendingRequests;
+        }
+    }
+	
     //displaying friends
     public boolean displayFriends(String loginName){
         ArrayList<String> usersFriends = new ArrayList<String>();
