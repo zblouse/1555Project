@@ -772,7 +772,7 @@ public class Phase2Java{
             String[] searchTerms = searcher.split(" ");
             for(int i=0;i<searchTerms.length;i++)
             {
-                query = "Select userID From profile WHERE userID = '"+searchTerms[i]+"'";
+                query = "Select name From profile WHERE name = '"+searchTerms[i]+"'";
                 resultSet = statement.executeQuery(query);
                 while(resultSet.next())
                 {
