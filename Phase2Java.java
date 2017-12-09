@@ -197,8 +197,8 @@ public class Phase2Java{
 
 
         } catch (Exception Ex) {
-            System.out.println("Error running the Initiate Friendship Querey.  Machine Error: " +
-                    Ex.toString());
+            //System.out.println("Error running the Initiate Friendship Querey.  Machine Error: " + Ex.toString());
+            return false;
         }
         try {
 
@@ -209,15 +209,12 @@ public class Phase2Java{
             query = "SELECT * FROM pendingFriends";
             resultSet = statement.executeQuery(query);
             if(resultSet==null){
-                System.out.println("Result set is null");
+                //System.out.println("Result set is null");
             }else {
-                System.out.println("\nAfter the insert, data is...\n");
+                //System.out.println("\nAfter the insert, data is...\n");
                 int counter = 1;
                 while (resultSet.next()) {
-                    System.out.println("Record " + counter + ": " +
-                            resultSet.getString(1) + ", " +
-                            resultSet.getString(2) + ", " +
-                            resultSet.getString(3));
+                    //System.out.println("Record " + counter + ": " +resultSet.getString(1) + ", " +resultSet.getString(2) + ", " +resultSet.getString(3));
 
                     counter++;
                 }
@@ -226,8 +223,8 @@ public class Phase2Java{
 
 
         } catch (Exception Ex) {
-            System.out.println("Error reading pending friend querey.  Machine Error: " +
-                    Ex.toString());
+
+            return false;
         }
 
 
@@ -294,6 +291,18 @@ public class Phase2Java{
         return false;
 
 
+    }
+    public HashMap<Integer,String> getFriendRequests(String loginName){
+        HashMap<Integer,String> pendingRequests = new HashMap<Integer,String>();
+        query = "SELECT * FROM pendingFriends where toID='" + loginName+"'";
+        resultSet = statement.executeQuery(query);
+        int counter = 0;
+        while (resultSet.next()) {
+            counter++;
+
+            pendingRequests.put(counter,resultSet.getString(1));
+        }
+        return pendingRequests;
     }
     //displaying friends
     public boolean displayFriends(String loginName){

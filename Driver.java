@@ -106,8 +106,22 @@ public class Driver{
         }
     }
     public boolean initiateFriendship(){
-        System.out.println("This function has not been implemented yet");
-        return true;
+        System.out.println("Enter the username of the user you  wish to send a friend request to");
+        String friendUsername = keyboard.nextLine();
+        System.out.println("Enter the message you would like to send to this user");
+        String message = keyboard.nextLine();
+        while(message.length()>200){
+            System.out.println("That message is too long to send");
+            System.out.println("Enter the message you would like to send to this user");
+            message = keyboard.nextLine();
+        }
+        if(connection.initiateFriendship(thisUser.getUsername(),friendUsername,message)){
+            System.out.println("Sent request");
+            return true;
+        }else{
+            System.out.println("Request Failed");
+            return false;
+        }
     }
     public boolean confirmFriendship(){
         System.out.println("This function has not been implemented yet");
