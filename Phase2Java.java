@@ -289,21 +289,26 @@ public class Phase2Java{
                     Ex.toString());
             return false;
         }
-        return false;
+
 
 
     }
     public HashMap<Integer,String> getFriendRequests(String loginName){
         HashMap<Integer,String> pendingRequests = new HashMap<Integer,String>();
-        query = "SELECT * FROM pendingFriends where toID='" + loginName+"'";
-        resultSet = statement.executeQuery(query);
-        int counter = 0;
-        while (resultSet.next()) {
-            counter++;
-
-            pendingRequests.put(counter,resultSet.getString(1));
+        try {
+            query = "SELECT * FROM pendingFriends where toID='" + loginName + "'";
+            resultSet = statement.executeQuery(query);
+            int counter = 0;
+            while (resultSet.next()) {
+                counter++;
+                pendingRequests.put(counter, resultSet.getString(1));
+            }
+            return pendingRequests;
+        }catch(Exception Ex) {
+            System.out.println("Error confirm friend.  Machine Error: " +
+                    Ex.toString());
+            return pendingRequests;
         }
-        return pendingRequests;
     }
     //displaying friends
     public boolean displayFriends(String loginName){
