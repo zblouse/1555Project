@@ -590,44 +590,5 @@ public class UsersStuff {
                     Ex.toString());
         }
     }
-    public static void main(String args[]) {
-        UsersStuff users = new UsersStuff();
-        Timestamp blankStamp = new Timestamp(87);
 
-       // users.createUser("zab31","Zach Blouse","adminPass","zab31@pitt.edu","1996-05-19",blankStamp);
-        //users.createUser("zab32","Zach Blouse","adminPass","zab32@pitt.edu","1996-05-19",blankStamp);
-        //users.createUser("zab33","Unidentified","adminPass","zab33@pitt.edu","1002-01-12",blankStamp);
-
-        /*
-        Boolean validLogin=users.userLogin("zab30","adminPass");
-        if(validLogin){
-            System.out.println("Logged in successfully");
-        }else{
-            System.out.println("Invalid username or password");
-        }
-        Boolean invalidLogin=users.userLogin("zab30","wrongPass");
-        if(invalidLogin){
-            System.out.println("Logged in successfully");
-        }else{
-            System.out.println("Invalid username or password");
-        }
-        */
-        //users.initiateFriendship("uav97","zab31","Hello friend. Please accept my request");
-        //users.confirmFriendship("zab31","uav97");
-        //users.initiateFriendship("zab31","zab32","Hello friend. Please accept my request");
-        //users.confirmFriendship("zab32","zab31");
-        //users.initiateFriendship("zab32","zab33","Hello friend. Please accept my request");
-        //users.confirmFriendship("zab33","zab32");
-        //users.displayFriends("zab30");
-        //users.displayFriends("uav97");
-        //User thisUser= users.retrieveProfile("zab30");
-        //System.out.println("Retrieved user: "+thisUser.getName());
-        //users.userLogOut("uav97");
-        //users.sendMessageToUser("zab30","uav97","Hi");
-        //users.sendMessageToUser("zblouse","uav97","Whats up");
-        //users.displayNewMessages("uav97");
-        users.topMessages(2,4);
-        users.closeConnection();
-
-    }
 }
