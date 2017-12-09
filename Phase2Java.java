@@ -365,14 +365,14 @@ public class Phase2Java{
             System.out.println("Friends friends: "+friendsFriends.toString());
             if(counter>=1){
                 return true;
-            }else{
-                return false;
             }
+            return true;
         }catch(Exception Ex) {
             System.out.println("Error Display friends querey.  Machine Error: " +
                     Ex.toString());
+            return false;
         }
-        return false;
+
 
 
     }

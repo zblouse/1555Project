@@ -147,8 +147,12 @@ public class Driver{
         }
     }
     public boolean displayFriends(){
-        System.out.println("This function has not been implemented yet");
-        return true;
+        if(connection.displayFriends(thisUser.getUsername())){
+            return true;
+        }else{
+            System.out.println("Failed to Display Friends");
+            return false;
+        }
     }
     public boolean createGroup(){
         System.out.println("This function has not been implemented yet");
