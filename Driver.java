@@ -7,7 +7,7 @@ public class Driver{
     private Scanner keyboard = new Scanner(System.in);
     private Phase2Java connection;
     private User thisUser;
-    private user someOtherUser;
+    private User someOtherUser;
     public static void main(String args[]){
        Driver thisDriver = new Driver();
     }
