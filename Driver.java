@@ -6,6 +6,8 @@ public class Driver{
     private boolean loggedIn=false;
     private Scanner keyboard = new Scanner(System.in);
     private Phase2Java connection;
+    private User thisUser;
+    private user someOtherUser;
     public static void main(String args[]){
        Driver thisDriver = new Driver();
     }
@@ -13,7 +15,7 @@ public class Driver{
 
         connection=new Phase2Java();
         //user is not logged in so only allow them to log in or create a new user account
-        if(!loggedIn){
+        while(!loggedIn){
             welcomePrompt();
         }
 
@@ -52,7 +54,14 @@ public class Driver{
         String newUsername = keyboard.nextLine();
         System.out.println("Password");
         String newPassword = keyboard.nextLine();
-        boolean validLogin = connection.
+        boolean validLogin = connection.userLogin(newUsername,newPassword);
+        if(validLogin){
+            loggedIn=true;
+            thisUser = connection.retrieveProfile(newUsername);
+            return true;
+        }else{
+            System.out.println("Invalid Username or Password");
+        }
     }
 
 }
