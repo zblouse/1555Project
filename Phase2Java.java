@@ -145,7 +145,7 @@ public class Phase2Java{
 
     }
     //logging out
-    public void userLogOut(String loginName){
+    public boolean userLogOut(String loginName){
         try {
             Timestamp currentStamp = new Timestamp(System.currentTimeMillis());
             statement = connection.createStatement(); //create an instance
@@ -159,11 +159,11 @@ public class Phase2Java{
             updateStatement.setTimestamp(1, currentStamp);
             updateStatement.setString(2, username);
             updateStatement.executeUpdate();
-            closeConnection();
-            System.exit(0);
+            return true;
         }catch(Exception Ex) {
             System.out.println("Error logout user querey.  Machine Error: " +
                     Ex.toString());
+            return false;
         }
 
     }
