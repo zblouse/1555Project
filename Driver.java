@@ -8,6 +8,7 @@ public class Driver{
     private Phase2Java connection;
     private User thisUser;
     private User someOtherUser;
+    private boolean loggedOut=false;
     public static void main(String args[]){
        Driver thisDriver = new Driver();
     }
@@ -18,6 +19,9 @@ public class Driver{
         while(!loggedIn){
             welcomePrompt();
         }
+        while(!loggedOut){
+            mainPrompt();
+        }
 
         connection.closeConnection();
     }
@@ -27,11 +31,48 @@ public class Driver{
         if(response==0){
             if(!createUser()){
                 System.out.println("Error Creating User");
-                System.exit(0);
             }
         }else if(response==1){
             loginPrompt();
         }
+    }
+    public void mainPrompt(){
+        System.out.println("Welcome "+thisUser.getName()+"\nPress 0 to Initiate Friendship");
+        System.out.println("Press 1 to Confirm Friendship\nPress 2 to Display Friends");
+        System.out.println("Press 3 to Create Group\nPress 4 to Initiate Adding Group");
+        System.out.println("Press 5 to Send Message to user\nPress 6 to Display Messages");
+        System.out.println("Press 7 to Display New Messages\nPress 8 to Search for a User");
+        System.out.println("Press 9 to do Three Degrees\nPress 10 to view Top Messages");
+        System.out.println("Press 11 to Drop user\nPress 12 to Log Out");
+        int response= Integer.parseInt(keyboard.nextLine());
+        if(response==0){
+            initiateFriendship();
+        }else if(response==1){
+            confirmFriendship();
+        }else if(response==2){
+            displayFriends();
+        }else if(response==3){
+            createGroup();
+        }else if(response==4){
+            initiateAddingGroup();
+        }else if(response==5){
+            sendMessageToUser();
+        }else if(response==6){
+            displayMessages();
+        }else if(response==7){
+            displayNewMessages();
+        }else if(response==8){
+            searchForUser();
+        }else if(response==9){
+            threeDegrees();
+        }else if(response==10){
+            topMessages();
+        }else if(response==11){
+            dropUser();
+        }else if(response==12){
+            logout();
+        }
+
     }
     public boolean createUser(){
         //String username, String name, String password, String email, String dob, Timestamp stamp
@@ -64,5 +105,64 @@ public class Driver{
             return false;
         }
     }
+    public boolean initiateFriendship(){
+        System.out.println("This function has not been implemented yet");
+        return true;
+    }
+    public boolean confirmFriendship(){
+        System.out.println("This function has not been implemented yet");
+        return true;
+    }
+    public boolean displayFriends(){
+        System.out.println("This function has not been implemented yet");
+        return true;
+    }
+    public boolean createGroup(){
+        System.out.println("This function has not been implemented yet");
+        return true;
+    }
+    public boolean initiateAddingGroup(){
+        System.out.println("This function has not been implemented yet");
+        return true;
+    }
+    public boolean sendMessageToUser(){
+        System.out.println("This function has not been implemented yet");
+        return true;
+    }
+    public boolean displayMessages(){
+        System.out.println("This function has not been implemented yet");
+        return true;
+    }
+    public boolean displayNewMessages(){
+        System.out.println("This function has not been implemented yet");
+        return true;
+    }
+    public boolean searchForUser(){
+        System.out.println("This function has not been implemented yet");
+        return true;
+    }
+    public boolean threeDegrees(){
+        System.out.println("This function has not been implemented yet");
+        return true;
+    }
+    public boolean topMessages(){
+        System.out.println("This function has not been implemented yet");
+        return true;
+    }
+    public boolean dropUser(){
+        System.out.println("This function has not been implemented yet");
+        return true;
+    }
+    public boolean logout(){
+        if(connection.userLogOut(thisUser.getUsername())){
+            loggedOut=true;
+            System.out.println("Thank you for using Social@Panther");
+            return true;
+        }else{
+            System.out.println("Error logging you out");
+            return false;
+        }
+    }
+
 
 }
