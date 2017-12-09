@@ -197,7 +197,7 @@ public class Phase2Java{
 
 
         } catch (Exception Ex) {
-            //System.out.println("Error running the Initiate Friendship Querey.  Machine Error: " + Ex.toString());
+            System.out.println("Error running the Initiate Friendship Querey.  Machine Error: " + Ex.toString());
             return false;
         }
         try {
@@ -223,7 +223,7 @@ public class Phase2Java{
 
 
         } catch (Exception Ex) {
-
+            System.out.println("Machine Error: " + Ex.toString());
             return false;
         }
 
@@ -287,6 +287,7 @@ public class Phase2Java{
         }catch(Exception Ex) {
             System.out.println("Error confirm friend.  Machine Error: " +
                     Ex.toString());
+            return false;
         }
         return false;
 

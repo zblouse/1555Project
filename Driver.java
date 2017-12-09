@@ -2,6 +2,7 @@
 import java.util.Scanner;
 import java.util.Calendar;
 import java.sql.*;
+import java.util.HashMap;
 public class Driver{
     private boolean loggedIn=false;
     private Scanner keyboard = new Scanner(System.in);
@@ -124,8 +125,26 @@ public class Driver{
         }
     }
     public boolean confirmFriendship(){
-        System.out.println("This function has not been implemented yet");
-        return true;
+       HashMap<Integer, String> pendingFriends = connection.getFriendRequests(thisUser.getUsername());
+        if(pendingFriends.keySet().size()==0){
+            System.out.println("you have no pending requests");
+            return true;
+        }else {
+            System.out.println("Your Pending Friend Requests");
+            for (int thisKey : pendingFriends.keySet()) {
+                System.out.println(thisKey + ": " + pendingFriends.get(thisKey));
+            }
+            System.out.println("Please enter the number corresponding to the friend request you would like to accept");
+            int response= Integer.parseInt(keyboard.nextLine());
+            if(connection.confirmFriendship(thisUser.getUsername(),pendingFriends.get(response))){
+                System.out.println("Successfully Confirmed Friend Request");
+                return true;
+            }else{
+                System.out.println("Failed to Confirm Friend Request");
+                return false;
+            }
+
+        }
     }
     public boolean displayFriends(){
         System.out.println("This function has not been implemented yet");
