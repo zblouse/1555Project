@@ -163,16 +163,38 @@ public class Driver{
         return true;
     }
     public boolean sendMessageToUser(){
-        System.out.println("This function has not been implemented yet");
-        return true;
+        System.out.println("Enter the username of the user you  wish to send a message to");
+        String friendUsername = keyboard.nextLine();
+        System.out.println("Enter the message you would like to send to this user");
+        String message = keyboard.nextLine();
+        while(message.length()>200){
+            System.out.println("That message is too long to send");
+            System.out.println("Enter the message you would like to send to this user");
+            message = keyboard.nextLine();
+        }
+        if(connection.sendMessageToUser(thisUser.getUsername(),friendUsername,message)){
+            System.out.println("Successfully Sent Message");
+            return true;
+        }else{
+            System.out.println("Error Sending Message");
+            return false;
+        }
     }
     public boolean displayMessages(){
-        System.out.println("This function has not been implemented yet");
-        return true;
+        if(connection.displayMessages(thisUser.getUsername())){
+            return true;
+        }else{
+            System.out.println("Error displaying Messages");
+            return false;
+        }
     }
     public boolean displayNewMessages(){
-        System.out.println("This function has not been implemented yet");
-        return true;
+        if(connection.displayNewMessages(thisUser.getUsername())){
+            return true;
+        }else{
+            System.out.println("Error displaying Messages");
+            return false;
+        }
     }
     public boolean searchForUser(){
         System.out.println("This function has not been implemented yet");
