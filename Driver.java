@@ -242,8 +242,26 @@ public class Driver{
 		}
     }
     public boolean threeDegrees(){
-        System.out.println("This function has not been implemented yet");
-        return true;
+        System.out.println("Please enter the username of the first user in the Three Degrees search");
+        String userA = keyboard.nextLine();
+        System.out.println("Please enter the username of the second user in the Three Degrees search");
+        String userB = keyboard.nextLine();
+        ArrayList<String> results = connection.threeDegrees(userA,userB);
+        if(results == null){
+            System.out.println("No result found");
+            return false;
+        }
+        if(results.size()!=0){
+            System.out.println("Three Degree search results:");
+            for(int i=0;i<results.size();i++)
+            {
+                System.out.println(results.get(i));
+            }
+            return true;
+        }else{
+            System.out.println("Three Degrees search was unsuccessful");
+            return false;
+        }
     }
     public boolean topMessages(){
         System.out.println("This function has not been implemented yet");

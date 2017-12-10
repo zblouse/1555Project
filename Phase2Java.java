@@ -871,7 +871,7 @@ public class Phase2Java{
                 }
             }
         }
-        return null;
+        return new ArrayList<String>();
     }
     private ArrayList<String> getFriendsList(String user)
     {
