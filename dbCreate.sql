@@ -105,12 +105,12 @@ CREATE OR REPLACE TRIGGER Remove_User
   REFERENCING OLD AS oldprof
   FOR EACH ROW
 	BEGIN
-		DELETE FROM Friends WHERE userID1 = :oldprof.userID OR userID2 = :oldprof.userID;
+		DELETE FROM friends WHERE userID1 = :oldprof.userID OR userID2 = :oldprof.userID;
 		DELETE FROM pendingFriends WHERE fromID = :oldprof.userID OR toID = :oldprof.userID;
 		DELETE FROM messages WHERE fromID = :oldprof.userID;
-		DELETE FROM messages WHERE toID = :oldprof.userID;
+		DELETE FROM messages WHERE toUserID = :oldprof.userID;
 		DELETE FROM messageRecipient WHERE userID = :oldprof.userID;
-		DELETE FROM pendingGroupMembers WHERE userID = :oldprof.userID;
+		DELETE FROM pendingGroupmembers WHERE userID = :oldprof.userID;
 		DELETE FROM groupMembership WHERE userID = :oldprof.userID;
 	END;
 /
