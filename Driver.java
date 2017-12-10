@@ -1,8 +1,10 @@
 //Jacob Winkler and Zach Blouse
 import java.util.Scanner;
 import java.util.Calendar;
+import java.util.ArrayList;
 import java.sql.*;
 import java.util.HashMap;
+import java.util.regex.*;
 public class Driver{
     private boolean loggedIn=false;
     private Scanner keyboard = new Scanner(System.in);
@@ -10,6 +12,7 @@ public class Driver{
     private User thisUser;
     private User someOtherUser;
     private boolean loggedOut=false;
+	private boolean clean=true;
     public static void main(String args[]){
        Driver thisDriver = new Driver();
     }
@@ -155,12 +158,40 @@ public class Driver{
         }
     }
     public boolean createGroup(){
-        System.out.println("This function has not been implemented yet");
-        return true;
+         //String username, String name, String password, String email, String dob, Timestamp stamp
+        System.out.println("Please Enter Group Name");
+        String newName = keyboard.nextLine();
+        System.out.println("Please Enter Group Description");
+        String newDescription = keyboard.nextLine();
+        System.out.println("Please Enter Group Limit");
+        String newGroupLimit = keyboard.nextLine();
+		int groupLim = Integer.parseInt(newGroupLimit);
+		//getuserID
+        if(connection.createGroup(thisUser.getUsername(),newName,newDescription, groupLim))
+		{
+			System.out.println("Successfully Created Group");
+			return true;
+		}else
+		{
+			System.out.println("Failed to Create Group");
+			return false;
+		}
     }
     public boolean initiateAddingGroup(){
-        System.out.println("This function has not been implemented yet");
-        return true;
+        System.out.println("Please enter Group Name");
+		String groupToJoin = keyboard.nextLine();
+		System.out.println("Please enter Your message to send");
+		String msg = keyboard.nextLine();
+		if(connection.initiateAddingGroup(thisUser.getUsername(), groupToJoin, msg))
+		{
+			System.out.println("Successfully sent join request");
+			return true;
+		}else 
+		{
+			System.out.println("Failed to send join request");
+			return false;
+		}
+		
     }
     public boolean sendMessageToUser(){
         System.out.println("Enter the username of the user you  wish to send a message to");
@@ -197,8 +228,18 @@ public class Driver{
         }
     }
     public boolean searchForUser(){
-        System.out.println("This function has not been implemented yet");
-        return true;
+        System.out.println("Enter User to search for. To search for multiple users, add a /between names(Ex. first last/first last)");
+		String userSearch = keyboard.nextLine();
+		ArrayList<String> results = connection.searchForUser(userSearch);
+		if(results.size()!=0){
+			for(int i=0;i<results.size();i++)
+			{
+				System.out.println(results.get(i));
+			}
+	    return true;
+		}else{
+		return false;
+		}
     }
     public boolean threeDegrees(){
         System.out.println("This function has not been implemented yet");
@@ -222,6 +263,17 @@ public class Driver{
             return false;
         }
     }
-
+	
+	private boolean scrubber(String input)
+	{
+		Pattern p = Pattern.compile("[\\w ]*+");
+		Matcher m = p.matcher(input);
+		if(m.matches()){
+		return true;
+		}else{
+			System.out.println("Bad Input Identified, please try again");
+			return false;
+		}
+	}
 
 }

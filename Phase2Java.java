@@ -314,7 +314,7 @@ public class Phase2Java{
 	public HashMap<Integer,String> getGroupRequests(String groupName){
         HashMap<Integer,String> pendingRequests = new HashMap<Integer,String>();
         try {
-            query = "SELECT * FROM pendingFriends where gID='" + groupName + "'";
+            query = "SELECT * FROM pendingGroupMembers where gID='" + groupName + "'";
             resultSet = statement.executeQuery(query);
             int counter = 0;
             while (resultSet.next()) {
@@ -803,7 +803,7 @@ public class Phase2Java{
         try{
             ArrayList<String> results = new ArrayList<String>();
             statement=connection.createStatement();
-            String[] searchTerms = searcher.split(" ");
+            String[] searchTerms = searcher.split("/");
             for(int i=0;i<searchTerms.length;i++)
             {
                 query = "Select name From profile WHERE name = '"+searchTerms[i]+"'";
