@@ -108,7 +108,7 @@ CREATE OR REPLACE TRIGGER Remove_User
 		DELETE FROM Friends WHERE userID1 = :oldprof.userID OR userID2 = :oldprof.userID;
 		DELETE FROM pendingFriends WHERE fromID = :oldprof.userID OR toID = :oldprof.userID;
 		DELETE FROM messages WHERE fromID = :oldprof.userID;
-		DELETE FROM messagess WHERE toID = :oldprof.userID;
+		DELETE FROM messages WHERE toID = :oldprof.userID;
 		DELETE FROM messageRecipient WHERE userID = :oldprof.userID;
 		DELETE FROM pendingGroupMembers WHERE userID = :oldprof.userID;
 		DELETE FROM groupMembership WHERE userID = :oldprof.userID;
