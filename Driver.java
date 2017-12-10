@@ -276,8 +276,15 @@ public class Driver{
 
     }
     public boolean dropUser(){
-        System.out.println("This function has not been implemented yet");
-        return true;
+       System.out.println("Enter the user you would like to drop");
+       String droppedUser = keyboard.nextLine();
+       if(connection.dropUser(droppedUser)){
+           System.out.println("User successfully dropped");
+           return true;
+       }else{
+           System.out.println("Error dropping user");
+           return true;
+       }
     }
     public boolean logout(){
         if(connection.userLogOut(thisUser.getUsername())){

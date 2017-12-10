@@ -905,7 +905,7 @@ public class Phase2Java{
             statement.executeQuery(query);
             return true;
         }catch(Exception Ex) {
-            System.out.println("Error running sample queries.  Machine Error: " +
+            System.out.println("Error running drop user.  Machine Error: " +
                     Ex.toString());
             return false;
         }
