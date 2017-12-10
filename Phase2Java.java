@@ -558,7 +558,7 @@ public class Phase2Java{
         }
         return false;
     }
-    public void topMessages(int k, int months){
+    public boolean topMessages(int k, int months){
         try {
             statement = connection.createStatement(); //create an instance
             //Hashmap<String,int> messageCounts = new Hashmap<String,int>();
@@ -569,7 +569,7 @@ public class Phase2Java{
 
             while (resultSet.next()) {
                 counter++;
-                System.out.println("Name: "+resultSet.getString(1)+"Messages: "+resultSet.getInt(2));
+                System.out.println("Name: "+resultSet.getString(1)+"\tMessages: "+resultSet.getInt(2));
             }
             //query = "SELECT toID, count(*) as cnt FROM messages where dateSent>add_months(sysdate,-"+months+") group by toID";
             //query="Select * from( Select fromID,sentCnt+receivedCnt from (SELECT fromID, count(*) as sentCnt FROM messages where dateSent>add_months(sysdate,-"+months+") group by fromID)sent inner join (SELECT toUserID, count(*) as receivedCnt FROM messages where dateSent>add_months(sysdate,-"+months+") group by toUserID)received ON sent.fromID=received.toUserID order by sentCnt+receivedCnt)where rownum<"+k;
@@ -584,12 +584,13 @@ public class Phase2Java{
                 */
                 //System.out.println("Name: "+resultSet.getString(1)+"Messages: "+resultSet.getInt(2));
             }
-
+            return true;
 
 
         }catch(Exception Ex) {
             System.out.println("Error retreiving top messages.  Machine Error: " +
                     Ex.toString());
+            return false;
         }
 
     }

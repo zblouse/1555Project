@@ -11,11 +11,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Phase2Java.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Phase2Java.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Phase2Java.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="873" column="20" lean-forward="true" selection-start-line="873" selection-start-column="20" selection-end-line="873" selection-end-column="20" />
+            <state relative-caret-position="190">
+              <caret line="571" column="70" lean-forward="false" selection-start-line="571" selection-start-column="70" selection-end-line="571" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -23,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Driver.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Driver.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Driver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="515">
-              <caret line="253" column="30" lean-forward="true" selection-start-line="253" selection-start-column="30" selection-end-line="253" selection-end-column="30" />
+            <state relative-caret-position="371">
+              <caret line="276" column="5" lean-forward="true" selection-start-line="276" selection-start-column="5" selection-end-line="276" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#498#499#0" expanded="true" />
@@ -83,6 +83,8 @@
       <find>send</find>
       <find>displa</find>
       <find>three</find>
+      <find>topMessages</find>
+      <find>topmessages</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -105,8 +107,8 @@
         <option value="$PROJECT_DIR$/Message.java" />
         <option value="$PROJECT_DIR$/UsersStuff.java" />
         <option value="$PROJECT_DIR$/User.java" />
-        <option value="$PROJECT_DIR$/Phase2Java.java" />
         <option value="$PROJECT_DIR$/Driver.java" />
+        <option value="$PROJECT_DIR$/Phase2Java.java" />
       </list>
     </option>
   </component>
@@ -536,24 +538,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Phase2Java.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="873" column="20" lean-forward="true" selection-start-line="873" selection-start-column="20" selection-end-line="873" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Driver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="253" column="30" lean-forward="true" selection-start-line="253" selection-start-column="30" selection-end-line="253" selection-end-column="30" />
+        <state relative-caret-position="371">
+          <caret line="276" column="5" lean-forward="true" selection-start-line="276" selection-start-column="5" selection-end-line="276" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#498#499#0" expanded="true" />
             <element signature="e#545#546#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Phase2Java.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="571" column="70" lean-forward="false" selection-start-line="571" selection-start-column="70" selection-end-line="571" selection-end-column="70" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -264,8 +264,16 @@ public class Driver{
         }
     }
     public boolean topMessages(){
-        System.out.println("This function has not been implemented yet");
-        return true;
+       System.out.println("Please enter the number of users you would like ranked");
+       int numUsers = Integer.parseInt(keyboard.nextLine());
+       System.out.println("Please enter the number of months you would like the ranking for");
+       int numMonths = Integer.parseInt(keyboard.nextLine());
+       if(connection.topMessages(numUsers,numMonths)){
+           return true;
+       }else{
+           return false;
+       }
+
     }
     public boolean dropUser(){
         System.out.println("This function has not been implemented yet");
